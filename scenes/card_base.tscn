@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://c28k6w7atrkjx"]
+
+[ext_resource type="Script" path="res://scripts/card_base.gd" id="1_rkwyn"]
+[ext_resource type="Texture2D" uid="uid://ctqm82sagtqbv" path="res://src/Sprite-0003-export.png" id="2_q2ggo"]
+
+[node name="CardBase" type="MarginContainer"]
+custom_minimum_size = Vector2(125, 175)
+offset_right = 129.0
+offset_bottom = 176.0
+pivot_offset = Vector2(125, 175)
+script = ExtResource("1_rkwyn")
+
+[node name="Card" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Border" type="Sprite2D" parent="."]
+texture = ExtResource("2_q2ggo")
+centered = false
+
+[node name="Bars" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="Bars"]
+custom_minimum_size = Vector2(0, 7.5)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VoidBar" type="MarginContainer" parent="Bars/TopBar"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+
+[node name="ManaBar" type="MarginContainer" parent="Bars/TopBar"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="ManaLabel" type="Label" parent="Bars/TopBar/ManaBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterBar" type="MarginContainer" parent="Bars"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="DescrBar" type="MarginContainer" parent="Bars"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="DescrLabel" type="Label" parent="Bars/DescrBar"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomBar" type="HBoxContainer" parent="Bars"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="AttackBar" type="MarginContainer" parent="Bars/BottomBar"]
+custom_minimum_size = Vector2(27, 0)
+layout_mode = 2
+
+[node name="AttackLabel" type="Label" parent="Bars/BottomBar/AttackBar"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameBar" type="MarginContainer" parent="Bars/BottomBar"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Bars/BottomBar/NameBar"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HpBar" type="MarginContainer" parent="Bars/BottomBar"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="HpLabel" type="Label" parent="Bars/BottomBar/HpBar"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
