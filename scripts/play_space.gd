@@ -27,11 +27,7 @@ func _ready():
 	var pcard2 = card_base.instantiate()
 	pcard2.card = cardDatabase.data[2]
 	matrix[2][0].add_child(pcard2)
-	
-	
-#	var ecard1 = card_base.instantiate()
-#	ecard1.card = cardDatabase.data[1]
-#	$Board/EnemyLine1/Slot3.add_child(ecard1)
+
 
 
 func _on_end_turn_pressed():
@@ -63,7 +59,7 @@ func _on_end_turn_pressed():
 	$TurnLabel.text = 'Ваш ход'
 	$EndTurn.disabled = false
 	$EndTurn.release_focus()
-	
+
 
 
 func _on_exit_button_pressed():

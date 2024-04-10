@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iewpeopyhvt3"
-path="res://.godot/imported/preview.webp-a1e6d4409326c5d10c92f1a1d3deaded.ctex"
+uid="uid://masmpaosywgr"
+path="res://.godot/imported/tile_map-export.png-4aed461c06cacc6411fd8febf6b9f217.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/card_arts/minion/preview.webp"
-dest_files=["res://.godot/imported/preview.webp-a1e6d4409326c5d10c92f1a1d3deaded.ctex"]
+source_file="res://src/tile_map-export.png"
+dest_files=["res://.godot/imported/tile_map-export.png-4aed461c06cacc6411fd8febf6b9f217.ctex"]
 
 [params]
 
