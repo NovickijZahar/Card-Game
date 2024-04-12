@@ -13,15 +13,14 @@ func _init():
 	card_arr = [
 		data[cards.Killer],
 		data[cards.Warrior],
-		data[cards.ShadowWarrior],
 		data[cards.Dragon],
-		data[cards.Spirit]
+		data[cards.DemonKnight]
 	]
 
 func replace(old_card, new_card):
-	for card in card_arr:
-		if old_card == card:
-			old_card = new_card
+	for i in range(card_arr.size()):
+		if old_card == card_arr[i]:
+			card_arr[i] = new_card
 			break
 
 

@@ -7,22 +7,22 @@
 script = ExtResource("1_mds67")
 
 [node name="CardSlot" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(664, 541)
+position = Vector2(664, 498)
 
 [node name="CardSlot2" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(858, 541)
+position = Vector2(858, 498)
 
 [node name="CardSlot3" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(1054, 541)
+position = Vector2(1054, 498)
 
 [node name="CardSlot4" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(664, 286)
+position = Vector2(664, 243)
 
 [node name="CardSlot5" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(858, 286)
+position = Vector2(858, 243)
 
 [node name="CardSlot6" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(1054, 290)
+position = Vector2(1054, 247)
 
 [node name="EndTurn" type="Button" parent="."]
 offset_left = 1604.0

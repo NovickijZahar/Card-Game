@@ -6,6 +6,7 @@ func _ready():
 	modulate = Color(Color.MEDIUM_PURPLE, 0.7)
 
 var occupied = false
+var card_base = null
 
 func _process(delta):
 	if Global.is_dragging and !occupied:

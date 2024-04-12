@@ -1,324 +1,107 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqswuo26ntxeh"]
+[gd_scene load_steps=5 format=3 uid="uid://djljptxmkbwj6"]
 
-[ext_resource type="Script" path="res://scripts/play_space.gd" id="1_1hu3i"]
-[ext_resource type="Texture2D" uid="uid://8cbc3e0yiymm" path="res://src/EnemyBg.png" id="2_okpsc"]
-[ext_resource type="Texture2D" uid="uid://byv1fw7hgo6m" path="res://src/PlayerBg.png" id="3_kxmwi"]
+[ext_resource type="PackedScene" uid="uid://bp7n5ww0e441n" path="res://scenes/card_slot.tscn" id="1_bnbr6"]
+[ext_resource type="Script" path="res://scripts/play_space.gd" id="1_mds67"]
+[ext_resource type="Texture2D" uid="uid://byv1fw7hgo6m" path="res://src/PlayerBg.png" id="3_lu3tf"]
+[ext_resource type="Texture2D" uid="uid://8cbc3e0yiymm" path="res://src/EnemyBg.png" id="4_2td2w"]
 
-[node name="PlaySpace" type="Node2D"]
-script = ExtResource("1_1hu3i")
+[node name="test" type="Node2D"]
+script = ExtResource("1_mds67")
 
 [node name="EndTurn" type="Button" parent="."]
-offset_left = 1726.0
-offset_top = 505.0
-offset_right = 1896.0
-offset_bottom = 597.0
-text = "Закончить
-ход"
+offset_left = 1604.0
+offset_top = 470.0
+offset_right = 1878.0
+offset_bottom = 577.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 30
+text = "Закончить ход"
 
-[node name="ExitButton" type="Button" parent="."]
-offset_left = 1814.0
-offset_right = 1919.0
-offset_bottom = 65.0
-text = "Выход"
+[node name="PlayerSlot1" type="Sprite2D" parent="."]
+position = Vector2(1119, 588)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_lu3tf")
 
-[node name="Board" type="GridContainer" parent="."]
-custom_minimum_size = Vector2(660, 720)
-offset_left = 588.0
-offset_top = 200.0
-offset_right = 1298.0
-offset_bottom = 920.0
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 10
-columns = 5
+[node name="PlayerSlot2" type="Sprite2D" parent="."]
+position = Vector2(729, 588)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_lu3tf")
 
-[node name="Slot1" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+[node name="PlayerSlot3" type="Sprite2D" parent="."]
+position = Vector2(923, 588)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_lu3tf")
 
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot1"]
-texture = ExtResource("2_okpsc")
-centered = false
+[node name="CardSlot2" parent="." instance=ExtResource("1_bnbr6")]
+position = Vector2(858, 498)
 
-[node name="Slot2" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+[node name="CardSlot3" parent="." instance=ExtResource("1_bnbr6")]
+position = Vector2(1054, 498)
 
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot2"]
-texture = ExtResource("2_okpsc")
-centered = false
+[node name="CardSlot1" parent="." instance=ExtResource("1_bnbr6")]
+position = Vector2(664, 498)
 
-[node name="Slot3" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+[node name="EnemySlot1" type="Sprite2D" parent="."]
+position = Vector2(729, 325)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_2td2w")
 
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot3"]
-texture = ExtResource("2_okpsc")
-centered = false
+[node name="EnemySlot2" type="Sprite2D" parent="."]
+position = Vector2(923, 325)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_2td2w")
 
-[node name="Slot4" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+[node name="EnemySlot3" type="Sprite2D" parent="."]
+position = Vector2(1119, 325)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_2td2w")
 
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot4"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot5" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot5"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot6" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot6"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot7" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot7"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot8" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot8"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot9" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot9"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot10" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot10"]
-texture = ExtResource("2_okpsc")
-centered = false
-
-[node name="Slot11" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot11"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot12" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot12"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot13" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot13"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot14" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot14"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot15" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot15"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot16" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot16"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot17" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot17"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot18" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot18"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot19" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot19"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="Slot20" type="MarginContainer" parent="Board"]
-custom_minimum_size = Vector2(130, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Board/Slot20"]
-texture = ExtResource("3_kxmwi")
-centered = false
-
-[node name="TurnLabel" type="Label" parent="."]
-offset_top = 540.0
-offset_right = 244.0
-offset_bottom = 605.0
-theme_override_font_sizes/font_size = 25
-text = "Ваш ход"
+[node name="MaxMana" type="Label" parent="."]
+offset_left = 1788.0
+offset_top = 935.0
+offset_right = 1838.0
+offset_bottom = 993.0
+theme_override_font_sizes/font_size = 40
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SepLabel" type="Label" parent="."]
+offset_left = 1754.0
+offset_top = 935.0
+offset_right = 1804.0
+offset_bottom = 993.0
+theme_override_font_sizes/font_size = 40
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentMana" type="Label" parent="."]
+offset_left = 1722.0
+offset_top = 935.0
+offset_right = 1772.0
+offset_bottom = 993.0
+theme_override_font_sizes/font_size = 40
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaLabel" type="Label" parent="."]
+offset_left = 1604.0
+offset_top = 935.0
+offset_right = 1734.0
+offset_bottom = 993.0
+theme_override_font_sizes/font_size = 40
+text = "Мана: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_right = 216.0
+offset_bottom = 91.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 30
+text = "Выйти"
+
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
