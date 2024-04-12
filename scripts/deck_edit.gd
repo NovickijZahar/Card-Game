@@ -57,8 +57,8 @@ func _on_change_button_pressed():
 
 		deck.replace(deck_card.card, collection_card.card)
 		
-#		collection_grid.move_child(deck_card, index1 - 1)
-#		deck_grid.move_child(collection_card, index2 - 1)
+		collection_grid.move_child(deck_card, index2)
+		deck_grid.move_child(collection_card, index1)
 		
 		collection_card = null
 		deck_card = null

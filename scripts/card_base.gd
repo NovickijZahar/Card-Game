@@ -61,7 +61,8 @@ func _process(delta):
 				tween.tween_property(self, "position", initial_position, 
 				0).set_ease(Tween.EASE_OUT)
 	if is_replace:
-		Global.selected_card = self
+		if Input.is_action_just_pressed("click"):
+			Global.selected_card = self
 
 var is_played: bool = false
 var enough_mana: bool = true
