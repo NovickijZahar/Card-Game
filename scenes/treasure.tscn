@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwlqxrro4fnoj"]
+
+[ext_resource type="Script" path="res://scripts/treasure.gd" id="1_lmphc"]
+
+[node name="Treasure" type="Node2D"]
+script = ExtResource("1_lmphc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 537.0
+offset_top = 455.0
+offset_right = 1344.0
+offset_bottom = 707.0
+size_flags_vertical = 3
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="ChooseButton" type="Button" parent="."]
+offset_left = 820.0
+offset_top = 833.0
+offset_right = 1071.0
+offset_bottom = 916.0
+theme_override_font_sizes/font_size = 30
+text = "Выбрать"
+
+[connection signal="pressed" from="ChooseButton" to="." method="_on_choose_button_pressed"]

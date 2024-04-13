@@ -25,6 +25,10 @@ func _on_exit_button_pressed():
 
 func _on_deck_edit_button_pressed():
 	get_tree().change_scene_to_file(\"res://scenes/deck_edit.tscn\")
+
+
+func _on_treasure_button_pressed():
+	get_tree().change_scene_to_file(\"res://scenes/treasure.tscn\")
 "
 
 [node name="Node2D" type="Node2D"]
@@ -62,6 +66,17 @@ text = "Редактор колоды"
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
+[node name="TreasureButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Добавить карту 
+в коллекцию"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -71,4 +86,5 @@ text = "Выход"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/DeckEditButton" to="." method="_on_deck_edit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TreasureButton" to="." method="_on_treasure_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

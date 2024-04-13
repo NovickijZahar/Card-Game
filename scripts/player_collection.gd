@@ -1,4 +1,4 @@
-class_name Deck
+class_name Collection
 
 static var instance = null
 var card_arr: Array
@@ -12,17 +12,16 @@ func _init():
 		data[cards.Killer],
 		data[cards.Warrior],
 		data[cards.Dragon],
-		data[cards.DemonKnight]
+		data[cards.DemonKnight],
+		data[cards.DragonBaby],
+		data[cards.Druid]
 	]
 
-func replace(old_card, new_card):
-	for i in range(card_arr.size()):
-		if old_card == card_arr[i]:
-			card_arr[i] = new_card
-			break
+func add_card(card):
+	card_arr.append(card)
 
 
 static func get_instance():
 	if instance == null:
-		instance = Deck.new()
+		instance = Collection.new()
 	return instance

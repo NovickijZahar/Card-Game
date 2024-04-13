@@ -17,8 +17,8 @@ func _ready():
 		card.is_enable = false
 		deck_grid.add_child(card)
 		
-	collection = CardDataBase.get_instance()
-	for data in collection.data.values():
+	collection = Collection.get_instance()
+	for data in collection.card_arr:
 		var flag = true
 		for c in deck.card_arr:
 			if data == c:
@@ -63,16 +63,6 @@ func _on_change_button_pressed():
 		collection_card = null
 		deck_card = null
 	
-	
-	
-#	var first = Global.selected_card
-#	first.get_parent().remove_child(first)
-#	collection_grid.add_child(first)
-#	first.get_parent().move_child(first, 0)
-	
-#	var second = collection_grid.get_child(0)
-#	second.get_parent().remove_child(second)
-#	deck_grid.add_child_below_node(second)
 
 
 func _on_exit_button_pressed():
