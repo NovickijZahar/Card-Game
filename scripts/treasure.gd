@@ -27,10 +27,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Global.selected_card != null:
+		if selected_card != null:
+			selected_card.get_child(0).get_child(0).visible = false
 		selected_card = Global.selected_card
+		selected_card.get_child(0).get_child(0).visible = true
 
 
 func _on_choose_button_pressed():
 	if selected_card != null:
 		collection.add_card(selected_card.card)
-	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+		get_tree().change_scene_to_file("res://scenes/map.tscn")

@@ -60,14 +60,14 @@ func _process(delta):
 			else:
 				tween.tween_property(self, "position", initial_position, 
 				0).set_ease(Tween.EASE_OUT)
-	if is_replace:
+	if is_chosen:
 		if Input.is_action_just_pressed("click"):
 			Global.selected_card = self
 
 var is_played: bool = false
 var enough_mana: bool = true
 var is_enable: bool = true
-var is_replace: bool = false
+var is_chosen: bool = false
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group('dropable') and !body.occupied:
@@ -89,11 +89,11 @@ func _on_area_2d_mouse_entered():
 	if !Global.is_dragging and !is_played and enough_mana and is_enable:
 		dragable = true
 		scale = Vector2(1.05, 1.05)
-	is_replace = true
+	is_chosen = true
 
 
 func _on_area_2d_mouse_exited():
 	if !Global.is_dragging:
 		dragable = false
 		scale = Vector2(1, 1)
-	is_replace = false
+	is_chosen = false

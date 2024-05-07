@@ -2,12 +2,27 @@ extends Node2D
 
 var astar_grid: AStarGrid2D
 @onready var tile_map = $"../TileMap"
+@onready var pm = $Camera2D/PopupMenu
+@onready var enter_button = $Camera2D/Button
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var is_moving: bool
 var speed: int = 800
+var current_pos
+var current_loc = Locations.None
+
+enum Locations
+{
+	None,
+	Treasure,
+	Enemy,
+	Shop
+}
+
 
 func _ready():
+	global_position = Global.map_position
+	$Camera2D/GridContainer/Label2.text = str(Global.money)
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(32, 32)
@@ -26,6 +41,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("move") == false:
 		return
+	
 	var id_path
 	if is_moving:
 		id_path = astar_grid.get_id_path(
@@ -51,9 +67,26 @@ func _physics_process(delta):
 	global_position = global_position.move_toward(target_position, speed * delta)
 	
 	if global_position == target_position:
-		current_id_path.pop_front()
-		
+		current_pos = current_id_path.pop_front()
+		enter_button.visible = false
 		if !current_id_path.is_empty():
 			target_position = tile_map.map_to_local(current_id_path.front())
 		else:
 			is_moving = false
+			if tile_map.get_cell_tile_data(0, current_pos)!= null and tile_map.get_cell_tile_data(0, current_pos).get_custom_data("event") != 0:
+				enter_button.visible = true
+				enter_button.text = "Войти"
+				current_loc = tile_map.get_cell_tile_data(0, current_pos).get_custom_data("event")
+
+
+func _on_button_pressed():
+	Global.map_position = global_position
+	tile_map.set_cell(0, current_pos, 2, Vector2i(1, 1))
+	match current_loc:
+		Locations.Treasure:
+			get_tree().change_scene_to_file("res://scenes/treasure.tscn")
+		Locations.Enemy:
+			get_tree().change_scene_to_file("res://scenes/play_space.tscn")
+		Locations.Shop:
+			pass
+	

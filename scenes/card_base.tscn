@@ -11,7 +11,24 @@ custom_minimum_size = Vector2(125, 175)
 offset_right = 129.0
 offset_bottom = 176.0
 pivot_offset = Vector2(125, 175)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_rkwyn")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(63, 88)
+
+[node name="ColorRect" type="ColorRect" parent="Area2D"]
+visible = false
+offset_left = -69.0
+offset_top = -95.0
+offset_right = 71.0
+offset_bottom = 93.0
+color = Color(0.258824, 0.643137, 0.435294, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.25, 0)
+shape = SubResource("RectangleShape2D_jki4v")
 
 [node name="Card" type="Sprite2D" parent="."]
 centered = false
@@ -93,13 +110,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(63, 88)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2.25, 0)
-shape = SubResource("RectangleShape2D_jki4v")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -33,9 +33,15 @@ func _ready():
 func _process(delta):
 	if Global.selected_card != null:
 		if Global.selected_card in deck_grid.get_children():
-			deck_card = Global.selected_card 
+			if deck_card != null:
+				deck_card.get_child(0).get_child(0).visible = false
+			deck_card = Global.selected_card
+			deck_card.get_child(0).get_child(0).visible = true 
 		elif Global.selected_card in collection_grid.get_children():
+			if collection_card != null:
+				collection_card.get_child(0).get_child(0).visible = false
 			collection_card = Global.selected_card
+			collection_card.get_child(0).get_child(0).visible = true 
 
 
 func _on_change_button_pressed():
@@ -48,23 +54,31 @@ func _on_change_button_pressed():
 		for i in range(collection_grid.get_children().size()):
 			if collection_grid.get_child(i) == collection_card:
 				index2 = i
-		
+
+		collection_card.get_child(0).get_child(0).visible = false
+		deck_card.get_child(0).get_child(0).visible = false
+
 		deck_grid.remove_child(deck_card)
 		collection_grid.add_child(deck_card)
-		
+
 		collection_grid.remove_child(collection_card)
 		deck_grid.add_child(collection_card)
 
 		deck.replace(deck_card.card, collection_card.card)
-		
+
 		collection_grid.move_child(deck_card, index2)
 		deck_grid.move_child(collection_card, index1)
-		
+
+		collection_card.get_child(0).get_child(0).visible = false
+		deck_card.get_child(0).get_child(0).visible = false
+
+		Global.selected_card = null
+		deck_card.get_child(0).get_child(0).visible = false
+		collection_card.get_child(0).get_child(0).visible = false
 		collection_card = null
 		deck_card = null
 	
 
 
 func _on_exit_button_pressed():
-	
 	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")

@@ -8,21 +8,29 @@ script = ExtResource("1_wu1pw")
 [node name="ScrollContainer2" type="ScrollContainer" parent="."]
 offset_left = 1287.0
 offset_top = 222.0
-offset_right = 1578.0
+offset_right = 1587.0
 offset_bottom = 766.0
 
 [node name="CollectionContainer" type="GridContainer" parent="ScrollContainer2"]
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-offset_left = 400.0
-offset_top = 222.0
-offset_right = 691.0
-offset_bottom = 766.0
+offset_left = 399.0
+offset_top = 229.0
+offset_right = 699.0
+offset_bottom = 773.0
 
 [node name="DeckContainer" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 2
 
 [node name="ChangeButton" type="Button" parent="."]
