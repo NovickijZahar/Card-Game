@@ -3,12 +3,12 @@ extends Node2D
 var astar_grid: AStarGrid2D
 @onready var tile_map = $"../TileMap"
 @onready var pm = $Camera2D/PopupMenu
-@onready var enter_button = $Camera2D/Button
+@onready var enter_button = $Camera2D/EnterButton
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var is_moving: bool
 var speed: int = 800
-var current_pos
+var current_pos: Vector2
 var current_loc = Locations.None
 
 enum Locations
@@ -22,6 +22,8 @@ enum Locations
 
 func _ready():
 	global_position = Global.map_position
+	for pos in Global.completed_events:
+		tile_map.set_cell(0, pos, 2, Vector2i(1, 1))
 	$Camera2D/GridContainer/Label2.text = str(Global.money)
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
@@ -81,7 +83,7 @@ func _physics_process(delta):
 
 func _on_button_pressed():
 	Global.map_position = global_position
-	tile_map.set_cell(0, current_pos, 2, Vector2i(1, 1))
+	Global.completed_events.append(current_pos)
 	match current_loc:
 		Locations.Treasure:
 			get_tree().change_scene_to_file("res://scenes/treasure.tscn")
@@ -90,3 +92,8 @@ func _on_button_pressed():
 		Locations.Shop:
 			pass
 	
+
+
+func _on_deck_edit_pressed():
+	Global.map_position = global_position
+	get_tree().change_scene_to_file("res://scenes/deck_edit.tscn")

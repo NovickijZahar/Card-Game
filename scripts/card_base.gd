@@ -1,5 +1,7 @@
 extends MarginContainer
 
+class_name CardBase
+
 var cardDatabase = CardDataBase.get_instance()
 var card = cardDatabase.data[0]
 

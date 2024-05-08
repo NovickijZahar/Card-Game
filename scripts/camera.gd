@@ -11,7 +11,7 @@ var offset_speed = 3
 
 var mouse_position: Vector2
 
-@onready var enter_button = $Button
+@onready var enter_button = $EnterButton
 
 
 func _input(event):

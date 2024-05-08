@@ -48,13 +48,21 @@ script = ExtResource("2_sjni2")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 script = ExtResource("3_ak5fx")
 
-[node name="Button" type="Button" parent="Player/Camera2D"]
+[node name="DeckEdit" type="Button" parent="Player/Camera2D"]
+offset_left = 773.0
+offset_top = -502.0
+offset_right = 936.0
+offset_bottom = -466.0
+theme_override_font_sizes/font_size = 15
+text = "Редактор колоды"
+
+[node name="EnterButton" type="Button" parent="Player/Camera2D"]
 visible = false
-offset_left = 782.0
-offset_top = -468.0
-offset_right = 945.0
-offset_bottom = -372.0
-theme_override_font_sizes/font_size = 30
+offset_left = 773.0
+offset_top = -435.0
+offset_right = 936.0
+offset_bottom = -399.0
+theme_override_font_sizes/font_size = 20
 text = "Начать"
 
 [node name="GridContainer" type="GridContainer" parent="Player/Camera2D"]
@@ -90,4 +98,5 @@ position = Vector2(0, -1.90735e-06)
 scale = Vector2(1.01563, 0.943077)
 texture = ExtResource("3_bh5b7")
 
-[connection signal="pressed" from="Player/Camera2D/Button" to="Player" method="_on_button_pressed"]
+[connection signal="pressed" from="Player/Camera2D/DeckEdit" to="Player" method="_on_deck_edit_pressed"]
+[connection signal="pressed" from="Player/Camera2D/EnterButton" to="Player" method="_on_button_pressed"]

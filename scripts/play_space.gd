@@ -117,4 +117,5 @@ func _on_end_turn_pressed():
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+	Global.money += randi_range(10, 100)
+	get_tree().change_scene_to_file("res://scenes/map.tscn")
