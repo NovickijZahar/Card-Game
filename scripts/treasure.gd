@@ -6,6 +6,8 @@ var collection
 var card_database
 var selected_card
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	collection = Collection.get_instance()

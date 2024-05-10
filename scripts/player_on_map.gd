@@ -2,7 +2,6 @@ extends Node2D
 
 var astar_grid: AStarGrid2D
 @onready var tile_map = $"../TileMap"
-@onready var pm = $Camera2D/PopupMenu
 @onready var enter_button = $Camera2D/EnterButton
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
@@ -14,17 +13,18 @@ var current_loc = Locations.None
 enum Locations
 {
 	None,
-	Treasure,
 	Enemy,
+	Treasure,
 	Shop
 }
-
 
 func _ready():
 	global_position = Global.map_position
 	for pos in Global.completed_events:
 		tile_map.set_cell(0, pos, 2, Vector2i(1, 1))
-	$Camera2D/GridContainer/Label2.text = str(Global.money)
+	for pos in Global.uncompleted_events.keys():
+		tile_map.set_cell(0, pos, 2, Global.uncompleted_events[pos])
+	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(32, 32)
@@ -58,7 +58,10 @@ func _input(event):
 	
 	if !id_path.is_empty():
 		current_id_path = id_path
-		
+
+func _process(delta):
+	$Camera2D/GridContainer/Label2.text = str(Global.money) + '$'
+
 func _physics_process(delta):
 	if current_id_path.is_empty():
 		return
@@ -83,17 +86,44 @@ func _physics_process(delta):
 
 func _on_button_pressed():
 	Global.map_position = global_position
-	Global.completed_events.append(current_pos)
+	print(Global.completed_events, Global.uncompleted_events)
 	match current_loc:
 		Locations.Treasure:
 			get_tree().change_scene_to_file("res://scenes/treasure.tscn")
+			Global.completed_events.append(current_pos)
+			Global.uncompleted_events.erase(Vector2i(current_pos))
 		Locations.Enemy:
 			get_tree().change_scene_to_file("res://scenes/play_space.tscn")
+			Global.completed_events.append(current_pos)
+			Global.uncompleted_events.erase(Vector2i(current_pos))
 		Locations.Shop:
-			pass
+			get_tree().change_scene_to_file("res://scenes/shop.tscn")
+	print(Global.completed_events, Global.uncompleted_events)
 	
 
 
 func _on_deck_edit_pressed():
 	Global.map_position = global_position
 	get_tree().change_scene_to_file("res://scenes/deck_edit.tscn")
+
+
+func _on_save_button_pressed():
+	Global.map_position = global_position
+	for x in tile_map.get_used_rect().size.x:
+		for y in tile_map.get_used_rect().size.y:
+			var tile_position = Vector2i(
+				x + tile_map.get_used_rect().position.x,
+				y + tile_map.get_used_rect().position.y
+			)
+			if tile_map.get_cell_tile_data(0, tile_position)!= null and tile_map.get_cell_tile_data(0, tile_position).get_custom_data("event") != 0:
+				Global.uncompleted_events[tile_position] =  tile_map.get_cell_atlas_coords(0, tile_position)
+	Global.save_data()
+
+
+func _on_load_button_pressed():
+	Global.load_data()
+	global_position = Global.map_position
+	for pos in Global.completed_events:
+		tile_map.set_cell(0, pos, 2, Vector2i(1, 1))
+	for pos in Global.uncompleted_events.keys():
+		tile_map.set_cell(0, pos, 2, Global.uncompleted_events[pos])
