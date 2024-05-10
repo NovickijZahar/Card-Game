@@ -19,7 +19,30 @@ offset_left = 820.0
 offset_top = 833.0
 offset_right = 1071.0
 offset_bottom = 916.0
+focus_mode = 0
 theme_override_font_sizes/font_size = 30
 text = "Выбрать"
 
+[node name="Popup" type="Popup" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.921569, 0.643137, 0.368627, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Popup/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+
 [connection signal="pressed" from="ChooseButton" to="." method="_on_choose_button_pressed"]
+[connection signal="popup_hide" from="Popup" to="." method="_on_popup_popup_hide"]

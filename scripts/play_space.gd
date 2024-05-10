@@ -117,5 +117,12 @@ func _on_end_turn_pressed():
 
 
 func _on_button_pressed():
-	Global.money += randi_range(10, 100)
+	var earned_money = randi_range(10, 50)
+	Global.money += earned_money
+	$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
+	$Popup.popup(Rect2i(450, 250, 1020, 560))
+
+
+
+func _on_popup_popup_hide():
 	get_tree().change_scene_to_file("res://scenes/map.tscn")

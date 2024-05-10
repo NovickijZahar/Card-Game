@@ -38,4 +38,10 @@ func _process(delta):
 func _on_choose_button_pressed():
 	if selected_card != null:
 		collection.add_card(selected_card.card)
-		get_tree().change_scene_to_file("res://scenes/map.tscn")
+		$Popup/CenterContainer/Label.text = 'Вы получили ' + selected_card.card.name
+		$Popup.popup(Rect2i(500, 300, 920, 460))
+
+
+
+func _on_popup_popup_hide():
+	get_tree().change_scene_to_file("res://scenes/map.tscn")

@@ -113,7 +113,7 @@ position = Vector2(-3.8147e-06, 7.62939e-06)
 scale = Vector2(0.440114, 0.375949)
 texture = ExtResource("4_1ao7v")
 
-[connection signal="pressed" from="Player/Camera2D/DeckEdit" to="Player" method="_on_deck_edit_pressed"]
-[connection signal="pressed" from="Player/Camera2D/LoadButton" to="Player" method="_on_load_button_pressed"]
-[connection signal="pressed" from="Player/Camera2D/SaveButton" to="Player" method="_on_save_button_pressed"]
-[connection signal="pressed" from="Player/Camera2D/EnterButton" to="Player" method="_on_button_pressed"]
+[connection signal="button_down" from="Player/Camera2D/DeckEdit" to="Player" method="_on_deck_edit_button_down"]
+[connection signal="button_down" from="Player/Camera2D/LoadButton" to="Player" method="_on_load_button_button_down"]
+[connection signal="button_down" from="Player/Camera2D/SaveButton" to="Player" method="_on_save_button_button_down"]
+[connection signal="button_down" from="Player/Camera2D/EnterButton" to="Player" method="_on_enter_button_button_down"]
