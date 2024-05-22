@@ -10,13 +10,17 @@ var enemy_board = [null, null, null]
 var hand_position = [Vector2(650, 800), Vector2(800, 800), 
 					Vector2(950, 800), Vector2(1100, 800)]
 var hand_cards = [null, null, null, null]
+var enemy_hand = [null, null, null, null]
+var enemy_deck
 @onready var max_mana = $MaxMana
 @onready var cur_mana = $CurrentMana
 
 var card_index = 0
+var enemy_index = 0
 
 var data
 const card_base = preload('res://scenes/card_base.tscn')
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,17 +29,25 @@ func _ready():
 	randomize()
 	var deck = Deck.get_instance()
 	
+	enemy_deck = CardDataBase.get_instance().data.values().duplicate()
+	enemy_deck.shuffle()
+	enemy_deck = enemy_deck.slice(0, 4)
+
 	data = deck.card_arr.duplicate()
 	data.shuffle()
 	
-	var card1 = card_base.instantiate()
-	card1.card = data[0]
-	card1.position = enemy_board_position[0]
-	card1.is_enable = false
-	enemy_board[0] = card1
-	add_child(card1)
+	if enemy_index != enemy_deck.size():
+		var card1 = card_base.instantiate()
+		card1.card = enemy_deck[enemy_index]
+		card1.is_enable = false
+		for i in range(3):
+			if enemy_board[i] == null:
+				card1.position = enemy_board_position[i]
+				enemy_board[i] = card1
+				add_child(card1)
+				enemy_index += 1
+				break
 	
-	await draw_card()
 	await draw_card()
 	await draw_card()
 
@@ -50,6 +62,9 @@ func _process(delta):
 					hand_cards[i] = null
 		if hand_cards[i] != null:
 			hand_cards[i].enough_mana = (hand_cards[i].get_manacost() <= int(cur_mana.text))
+	if data.size() - card_index == 0:
+		$MarginContainer/CardBack.visible = false
+	$MarginContainer/ColorRect.tooltip_text = 'В вашей колоде ' + str(data.size() - card_index) + ' карт'
 
 func draw_card():
 	for i in range(hand_cards.size()):
@@ -91,8 +106,21 @@ func enemy_turn():
 					remove_child(player_board[i])
 					slots[i].occupied = false
 					player_board[i] = null
+	if enemy_index != enemy_deck.size():
+		var card1 = card_base.instantiate()
+		card1.card = enemy_deck[enemy_index]
+		card1.is_enable = false
+		for i in range(3):
+			if enemy_board[i] == null:
+				card1.position = enemy_board_position[i]
+				enemy_board[i] = card1
+				add_child(card1)
+				enemy_index += 1
+				break
+	
 
 func _on_end_turn_pressed():
+	
 	$EndTurn.disabled = true
 	for i in range(hand_cards.size()):
 		if hand_cards[i] != null:

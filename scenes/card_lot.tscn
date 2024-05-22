@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk8lyeknbhttm"]
+
+[ext_resource type="PackedScene" uid="uid://c28k6w7atrkjx" path="res://scenes/card_base.tscn" id="1_qghhf"]
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardBase" parent="." instance=ExtResource("1_qghhf")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CardBase"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CardBase/HBoxContainer"]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardBase/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CardBase/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Цена: "
+
+[node name="Label2" type="Label" parent="CardBase/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
