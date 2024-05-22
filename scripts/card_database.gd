@@ -5,7 +5,7 @@ var data: Dictionary
 
 enum Cards
 {
-	Killer, 
+	Killer = 1, 
 	Warrior, 
 	Spirit, 
 	ShadowWarrior, 

@@ -22,11 +22,10 @@ enum Locations
 
 
 func _ready():
-	global_position = Global.map_position
-	for pos in Global.completed_events:
-		tile_map.set_cell(0, pos, 2, Vector2i(1, 1))
-	for pos in Global.uncompleted_events.keys():
-		tile_map.set_cell(0, pos, 2, Global.uncompleted_events[pos])
+	$Camera2D/GridContainer/Label2.text = str(DatabaseService.get_money()) + '$'
+	global_position = DatabaseService.get_map_position()
+	for pos in DatabaseService.get_completed_events():
+		tile_map.set_cell(0, Vector2(pos[0], pos[1]), 2, Vector2i(1, 1))
 	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
@@ -63,9 +62,6 @@ func _input(event):
 	if !id_path.is_empty():
 		current_id_path = id_path
 
-func _process(delta):
-	$Camera2D/GridContainer/Label2.text = str(Global.money) + '$'
-
 func _physics_process(delta):
 	if flag:
 		if current_id_path.is_empty():
@@ -92,50 +88,20 @@ func _physics_process(delta):
 
 func _on_deck_edit_button_down():
 	flag = false
-	Global.map_position = global_position
+	DatabaseService.set_map_position(global_position)
 	get_tree().change_scene_to_file("res://scenes/deck_edit.tscn")
 
-
-func _on_load_button_button_down():
-	flag = false
-	Global.load_data()
-	global_position = Global.map_position
-	for pos in Global.completed_events:
-		tile_map.set_cell(0, pos, 2, Vector2i(1, 1))
-	for pos in Global.uncompleted_events.keys():
-		tile_map.set_cell(0, pos, 2, Global.uncompleted_events[pos])
-	current_id_path.clear()
-	enter_button.visible = false
-	flag = true
-
-
-func _on_save_button_button_down():
-	flag = false
-	Global.map_position = global_position
-	for x in tile_map.get_used_rect().size.x:
-		for y in tile_map.get_used_rect().size.y:
-			var tile_position = Vector2i(
-				x + tile_map.get_used_rect().position.x,
-				y + tile_map.get_used_rect().position.y
-			)
-			if tile_map.get_cell_tile_data(0, tile_position)!= null and tile_map.get_cell_tile_data(0, tile_position).get_custom_data("event") != 0:
-				Global.uncompleted_events[tile_position] =  tile_map.get_cell_atlas_coords(0, tile_position)
-	current_id_path.clear()
-	Global.save_data()
-	flag = true
 
 
 func _on_enter_button_button_down():
 	flag = false
-	Global.map_position = global_position
+	DatabaseService.set_map_position(global_position)
 	match current_loc:
 		Locations.Treasure:
 			get_tree().change_scene_to_file("res://scenes/treasure.tscn")
-			Global.completed_events.append(current_pos)
-			Global.uncompleted_events.erase(Vector2i(current_pos))
+			DatabaseService.add_completed_event(current_pos)
 		Locations.Enemy:
 			get_tree().change_scene_to_file("res://scenes/play_space.tscn")
-			Global.completed_events.append(current_pos)
-			Global.uncompleted_events.erase(Vector2i(current_pos))
+			DatabaseService.add_completed_event(current_pos)
 		Locations.Shop:
 			get_tree().change_scene_to_file("res://scenes/shop.tscn")

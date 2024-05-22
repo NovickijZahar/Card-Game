@@ -1,32 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bfi6ild6gmsu8"]
 
-[sub_resource type="GDScript" id="GDScript_mkqwk"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-func _on_start_button_pressed():
-	get_tree().change_scene_to_file(\"res://scenes/map.tscn\")
-
-
-func _on_exit_button_pressed():
-	get_tree().quit()
-
-
-
-"
+[ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_b7oni"]
 
 [node name="Node2D" type="Node2D"]
-script = SubResource("GDScript_mkqwk")
+script = ExtResource("1_b7oni")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(500, 1080)
@@ -49,6 +26,16 @@ text = "Начать"
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
+[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Продолжить"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -57,4 +44,5 @@ theme_override_font_sizes/font_size = 40
 text = "Выход"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

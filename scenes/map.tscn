@@ -57,20 +57,6 @@ offset_bottom = -467.0
 theme_override_font_sizes/font_size = 15
 text = "Редактор колоды"
 
-[node name="LoadButton" type="Button" parent="Player/Camera2D"]
-offset_left = 783.0
-offset_top = -415.0
-offset_right = 946.0
-offset_bottom = -379.0
-text = "Загрузить"
-
-[node name="SaveButton" type="Button" parent="Player/Camera2D"]
-offset_left = 783.0
-offset_top = -460.0
-offset_right = 946.0
-offset_bottom = -424.0
-text = "Сохранить"
-
 [node name="EnterButton" type="Button" parent="Player/Camera2D"]
 visible = false
 offset_left = 773.0
@@ -114,6 +100,4 @@ scale = Vector2(0.440114, 0.375949)
 texture = ExtResource("4_1ao7v")
 
 [connection signal="button_down" from="Player/Camera2D/DeckEdit" to="Player" method="_on_deck_edit_button_down"]
-[connection signal="button_down" from="Player/Camera2D/LoadButton" to="Player" method="_on_load_button_button_down"]
-[connection signal="button_down" from="Player/Camera2D/SaveButton" to="Player" method="_on_save_button_button_down"]
 [connection signal="button_down" from="Player/Camera2D/EnterButton" to="Player" method="_on_enter_button_button_down"]

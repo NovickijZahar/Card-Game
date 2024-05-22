@@ -10,25 +10,18 @@ var collection_card = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	deck = Deck.get_instance()
-	for data in deck.card_arr:
+	var deck = DatabaseService.get_deck()
+	for c in deck:
 		var card = card_base.instantiate()
-		card.card = data
+		card.card = c
 		card.is_enable = false
-		deck_grid.add_child(card)
-		
-	collection = Collection.get_instance()
-	for data in collection.card_arr:
-		var flag = true
-		for c in deck.card_arr:
-			if data == c:
-				flag = false
-				break
-		if flag:
-			var card = card_base.instantiate()
-			card.card = data
-			card.is_enable = false
-			collection_grid.add_child(card)
+		deck_grid.add_child(card) 
+	var collection = DatabaseService.get_collection(true)
+	for c in collection:
+		var card = card_base.instantiate()
+		card.card = c
+		card.is_enable = false
+		collection_grid.add_child(card) 
 
 func _process(delta):
 	if Global.selected_card != null:
@@ -64,7 +57,7 @@ func _on_change_button_pressed():
 		collection_grid.remove_child(collection_card)
 		deck_grid.add_child(collection_card)
 
-		deck.replace(deck_card.card, collection_card.card)
+		DatabaseService.replace_in_deck(deck_card.card.name, collection_card.card.name)
 
 		collection_grid.move_child(deck_card, index2)
 		deck_grid.move_child(collection_card, index1)

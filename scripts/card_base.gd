@@ -3,7 +3,7 @@ extends MarginContainer
 class_name CardBase
 
 var cardDatabase = CardDataBase.get_instance()
-var card = cardDatabase.data[0]
+var card = DatabaseService.get_card(1)
 
 
 func _ready():

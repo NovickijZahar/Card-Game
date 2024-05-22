@@ -27,13 +27,12 @@ func _ready():
 	cur_mana.text = "5"
 	max_mana.text = "5"
 	randomize()
-	var deck = Deck.get_instance()
 	
-	enemy_deck = CardDataBase.get_instance().data.values().duplicate()
+	enemy_deck = DatabaseService.get_collection()
 	enemy_deck.shuffle()
 	enemy_deck = enemy_deck.slice(0, 4)
 
-	data = deck.card_arr.duplicate()
+	data = DatabaseService.get_deck()
 	data.shuffle()
 	
 	if enemy_index != enemy_deck.size():
@@ -146,7 +145,7 @@ func _on_end_turn_pressed():
 
 func _on_button_pressed():
 	var earned_money = randi_range(10, 50)
-	Global.money += earned_money
+	DatabaseService.add_money(earned_money)
 	$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
 	$Popup.popup(Rect2i(450, 250, 1020, 560))
 

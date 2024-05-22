@@ -8,7 +8,7 @@ var hp: int
 func _init(name, description, image_name, rarity, manacost, attack, hp):
 	self.name = name
 	self.description = description
-	self.rartity = rarity
+	self.rartity  = rarity
 	self.manacost = manacost
 	self.attack = attack
 	self.hp = hp

@@ -10,21 +10,19 @@ var selected_lot
 
 
 func _ready():
-	$DataContainer/Label2.text = str(Global.money) + '$'
-	collection = Collection.get_instance()
-	card_database = CardDataBase.get_instance().data.values()
-	card_database.shuffle()
+	$DataContainer/Label2.text = str(DatabaseService.get_money()) + '$'
+	var all_cards = DatabaseService.get_all_cards(true)
+	all_cards.shuffle()
 	var i = 0
-	for card in card_database:
-		if card not in collection.card_arr:
-			var c = card_lot.instantiate()
-			c.get_child(0).card = card
-			c.get_child(0).is_enable = false
-			c.get_child(0).get_child(4).get_child(1).get_child(1).text = str(randi_range(50, 150))
-			container.add_child(c)
-			i += 1
-			if i == 2:
-				break
+	for card in all_cards:
+		var c = card_lot.instantiate()
+		c.get_child(0).card = card
+		c.get_child(0).is_enable = false
+		c.get_child(0).get_child(4).get_child(1).get_child(1).text = str(randi_range(50, 150))
+		container.add_child(c)
+		i += 1
+		if i == 2:
+			break
 
 func _process(delta):
 	if Global.selected_card != null:
@@ -37,7 +35,7 @@ func _process(delta):
 		if c.get_child(0) == selected_card:
 			selected_price = int(c.get_child(0).get_child(4).get_child(1).get_child(1).text)
 			selected_lot = c
-			if Global.money < selected_price:
+			if DatabaseService.get_money() < selected_price:
 				selected_card.get_child(0).get_child(0).color = Color('ff301a')
 
 
@@ -49,11 +47,11 @@ func _on_return_button_pressed():
 
 func _on_buy_button_pressed():
 	if selected_card != null and selected_price != null:
-		if Global.money >= selected_price:
-			collection.add_card(selected_card.card)
-			Global.money -= selected_price
+		if DatabaseService.get_money() >= selected_price:
+			DatabaseService.add_to_colletion(selected_card.card.name)
+			DatabaseService.add_money(-selected_price)
 			container.remove_child(selected_lot)
-			$DataContainer/Label2.text = str(Global.money) + '$'
+			$DataContainer/Label2.text = str(DatabaseService.get_money()) + '$'
 			$Popup/CenterContainer/Label.text = 'Вы приобрели ' + selected_card.card.name + '\nза ' + str(selected_price) + '$'
 			$Popup.popup(Rect2i(500, 300, 920, 460))
 		else:

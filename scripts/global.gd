@@ -18,6 +18,7 @@ var LVL = {
 	2000: 2,
 }
 
+
 func save_data():
 	var config = ConfigFile.new()
 	config.load(path_to_file)
