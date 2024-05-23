@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2ee2cxy7mpai"]
+
+[ext_resource type="Script" path="res://scripts/hero_base.gd" id="1_l70yy"]
+
+[node name="HeroBase" type="MarginContainer"]
+custom_minimum_size = Vector2(225, 250)
+script = ExtResource("1_l70yy")
+
+[node name="Art" type="Sprite2D" parent="."]
+centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(175, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(175, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.284785, 0.381562, 0.0943997, 1)
+theme_override_colors/font_shadow_color = Color(0.378128, 0.326308, 0.262014, 1)
+theme_override_colors/font_outline_color = Color(0.200063, 0.161311, 0.0772113, 1)
+theme_override_font_sizes/font_size = 20
+text = "Название"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+color = Color(0.458906, 0.362554, 0.187182, 1)
+
+[node name="HpLabel" type="Label" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.257719, 0.553075, 1.92523e-07, 1)
+theme_override_colors/font_shadow_color = Color(0.63595, 0, 0.141835, 1)
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3

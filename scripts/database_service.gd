@@ -13,6 +13,16 @@ func replace_in_deck(old_name, new_name):
 	database.update_rows("CardDataBase", "name==\'"+old_name+"\'", {"in_deck": false})
 	database.update_rows("CardDataBase", "name==\'"+new_name+"\'", {"in_deck": true})
 
+func get_enemy_deck(id):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var row = database.select_rows("Heroes", "id=="+str(id), ["deck"])[0]["deck"]
+	var res = []
+	for c in JSON.parse_string(row):
+		res.append(get_card(c))
+	return res
+
 func get_deck():
 	var database = SQLite.new()
 	database.path = 'res://data.db'
@@ -127,3 +137,38 @@ func clear_completed_events():
 	database.path = 'res://data.db'
 	database.open_db()
 	database.update_rows("Player", "id==1", {"completed_events": "[]"})
+
+func get_hero(id: int):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var row = database.select_rows("Heroes", "id="+str(id), ["*"])[0]
+	return Hero.new(row["name"], row["image_name"],
+					JSON.parse_string(row["deck"]), row["hp"])
+
+func get_features(arr: Array, to_string=false):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var res
+	if to_string:
+		res = ""
+		for i in arr:
+			res += database.select_rows("Features", "id=="+str(i), ["name"])[0]["name"] + ', '
+		if res.ends_with(', '):
+			res = res.erase(res.length() - 2)
+	else:
+		res = []
+		for i in arr:
+			res.append(database.select_rows("Features", "id=="+str(i), ["name"])[0]["name"])
+	return res
+
+func get_features_tooltip(arr: Array):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var res = ""
+	for i in arr:
+		var row = database.select_rows("Features", "id=="+str(i), ["name", "description"])[0]
+		res += row["name"] + ": " + row["description"] + '\n'
+	return res

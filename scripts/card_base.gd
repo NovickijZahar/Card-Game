@@ -2,7 +2,6 @@ extends MarginContainer
 
 class_name CardBase
 
-var cardDatabase = CardDataBase.get_instance()
 var card = DatabaseService.get_card(1)
 
 
@@ -15,8 +14,9 @@ func _ready():
 	$Bars/BottomBar/AttackBar/AttackLabel.text = str(card.attack)
 	$Bars/BottomBar/HpBar/HpLabel.text = str(card.hp)
 	$Bars/BottomBar/NameBar/NameLabel.text = card.name
-	$Bars/DescrBar/DescrLabel.text = card.description
+	$Bars/DescrBar/DescrLabel.text = DatabaseService.get_features(JSON.parse_string(card.description), true)
 	$Bars/TopBar/ManaBar/ManaLabel.text = str(card.manacost)
+	tooltip_text = DatabaseService.get_features_tooltip(JSON.parse_string(card.description))
 
 
 func get_damage(damage) -> bool:
@@ -26,6 +26,9 @@ func get_damage(damage) -> bool:
 		return true
 	return false
 
+func change_stats(d_attack, d_hp):
+	$Bars/BottomBar/AttackBar/AttackLabel.text = str(int($Bars/BottomBar/AttackBar/AttackLabel.text) + d_attack)
+	$Bars/BottomBar/HpBar/HpLabel.text = str(int($Bars/BottomBar/HpBar/HpLabel.text) + d_hp)
 
 func deal_damage() -> int:
 	return int($Bars/BottomBar/AttackBar/AttackLabel.text)

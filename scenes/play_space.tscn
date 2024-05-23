@@ -1,59 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://djljptxmkbwj6"]
+[gd_scene load_steps=7 format=3 uid="uid://djljptxmkbwj6"]
 
 [ext_resource type="PackedScene" uid="uid://bp7n5ww0e441n" path="res://scenes/card_slot.tscn" id="1_bnbr6"]
 [ext_resource type="Script" path="res://scripts/play_space.gd" id="1_mds67"]
 [ext_resource type="Texture2D" uid="uid://byv1fw7hgo6m" path="res://src/PlayerBg.png" id="3_lu3tf"]
 [ext_resource type="Texture2D" uid="uid://8cbc3e0yiymm" path="res://src/EnemyBg.png" id="4_2td2w"]
 [ext_resource type="Texture2D" uid="uid://degocvjnso5mw" path="res://src/card_back.png" id="5_whoj4"]
+[ext_resource type="PackedScene" uid="uid://b2ee2cxy7mpai" path="res://scenes/hero_base.tscn" id="6_obgaq"]
 
 [node name="test" type="Node2D"]
 script = ExtResource("1_mds67")
 
 [node name="EndTurn" type="Button" parent="."]
-offset_left = 1604.0
-offset_top = 470.0
-offset_right = 1878.0
-offset_bottom = 577.0
+offset_left = 1627.0
+offset_top = 578.0
+offset_right = 1901.0
+offset_bottom = 685.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 30
 text = "Закончить ход"
 
 [node name="PlayerSlot1" type="Sprite2D" parent="."]
-position = Vector2(1119, 588)
+position = Vector2(893, 644)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_lu3tf")
 
 [node name="PlayerSlot2" type="Sprite2D" parent="."]
-position = Vector2(729, 588)
+position = Vector2(893, 127)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_lu3tf")
 
 [node name="PlayerSlot3" type="Sprite2D" parent="."]
-position = Vector2(923, 588)
+position = Vector2(893, 380)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_lu3tf")
 
 [node name="CardSlot2" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(858, 498)
+position = Vector2(828, 290)
 
 [node name="CardSlot3" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(1054, 498)
+position = Vector2(828, 554)
 
 [node name="CardSlot1" parent="." instance=ExtResource("1_bnbr6")]
-position = Vector2(664, 498)
+position = Vector2(828, 37)
 
 [node name="EnemySlot1" type="Sprite2D" parent="."]
-position = Vector2(729, 325)
+position = Vector2(1099, 127)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_2td2w")
 
 [node name="EnemySlot2" type="Sprite2D" parent="."]
-position = Vector2(923, 325)
+position = Vector2(1099, 380)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_2td2w")
 
 [node name="EnemySlot3" type="Sprite2D" parent="."]
-position = Vector2(1119, 325)
+position = Vector2(1098, 644)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_2td2w")
 
@@ -128,10 +129,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 1395.0
-offset_top = 578.0
-offset_right = 1533.0
-offset_bottom = 763.0
+offset_left = 1517.0
+offset_top = 706.0
+offset_right = 1655.0
+offset_bottom = 891.0
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer"]
 layout_mode = 2
@@ -141,6 +142,93 @@ color = Color(0.945098, 0.47451, 0.356863, 1)
 position = Vector2(68, 93)
 scale = Vector2(0.125733, 0.172852)
 texture = ExtResource("5_whoj4")
+
+[node name="PlayerSlot4" type="Sprite2D" parent="."]
+position = Vector2(687, 127)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_lu3tf")
+
+[node name="CardSlot4" parent="." instance=ExtResource("1_bnbr6")]
+position = Vector2(622, 37)
+
+[node name="PlayerSlot5" type="Sprite2D" parent="."]
+position = Vector2(687, 380)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_lu3tf")
+
+[node name="CardSlot5" parent="." instance=ExtResource("1_bnbr6")]
+position = Vector2(622, 290)
+
+[node name="PlayerSlot6" type="Sprite2D" parent="."]
+position = Vector2(687, 644)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_lu3tf")
+
+[node name="CardSlot6" parent="." instance=ExtResource("1_bnbr6")]
+position = Vector2(622, 554)
+
+[node name="EnemySlot4" type="Sprite2D" parent="."]
+position = Vector2(1306, 127)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_2td2w")
+
+[node name="EnemySlot5" type="Sprite2D" parent="."]
+position = Vector2(1305, 380)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_2td2w")
+
+[node name="EnemySlot6" type="Sprite2D" parent="."]
+position = Vector2(1305, 644)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_2td2w")
+
+[node name="HeroBase" parent="." instance=ExtResource("6_obgaq")]
+offset_left = 282.0
+offset_top = 235.0
+offset_right = 507.0
+offset_bottom = 527.0
+
+[node name="HeroBase2" parent="." instance=ExtResource("6_obgaq")]
+offset_left = 1468.0
+offset_top = 235.0
+offset_right = 1693.0
+offset_bottom = 527.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+offset_left = 282.0
+offset_top = 192.0
+offset_right = 507.0
+offset_bottom = 235.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2"]
+layout_mode = 2
+color = Color(0.788235, 0.568627, 0.415686, 1)
+
+[node name="Label" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Вы"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+offset_left = 1468.0
+offset_top = 221.0
+offset_right = 1693.0
+offset_bottom = 264.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer3"]
+layout_mode = 2
+color = Color(0.788235, 0.568627, 0.415686, 1)
+
+[node name="Label" type="Label" parent="MarginContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Противник"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
