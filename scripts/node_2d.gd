@@ -52,7 +52,8 @@ func _on_start_button_pressed():
 		"experience": {"data_type": "int"},
 		"map_position_x": {"data_type": "real", "default": 0.0},
 		"map_position_y": {"data_type": "real", "default": 0.0},
-		"completed_events": {"data_type": "text", "default": "[]"}
+		"completed_events": {"data_type": "text", "default": "[]"},
+		"current_location": {"data_type": "int", "default": 1}
 	}
 	database.drop_table("Player")
 	database.create_table("Player", player_table)

@@ -161,17 +161,6 @@ func enemy_play():
 			enemy_board[res[0]][res[1]] = card1
 			add_child(card1)
 			enemy_index += 1
-		
-		#for i in range(2):
-			#if flag:
-				#for j in range(3):
-					#if enemy_board[i][j] == null:
-						#card1.position = enemy_board_position[i][j]
-						#enemy_board[i][j] = card1
-						#add_child(card1)
-						#enemy_index += 1
-						#flag = false
-						#break
 
 func _on_end_turn_pressed():
 	

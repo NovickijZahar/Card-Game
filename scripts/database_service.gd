@@ -172,3 +172,15 @@ func get_features_tooltip(arr: Array):
 		var row = database.select_rows("Features", "id=="+str(i), ["name", "description"])[0]
 		res += row["name"] + ": " + row["description"] + '\n'
 	return res
+
+func change_room(new_room: int):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	database.update_rows("Player", "id==1", {"current_location": new_room})
+
+func get_current_room():
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	return database.select_rows("Player", "id==1", ["current_location"])[0]["current_location"]

@@ -44,5 +44,16 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 
+[node name="Label" type="Label" parent="."]
+offset_left = 677.0
+offset_top = 190.0
+offset_right = 1216.0
+offset_bottom = 259.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Выберите одну карту"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="ChooseButton" to="." method="_on_choose_button_pressed"]
 [connection signal="popup_hide" from="Popup" to="." method="_on_popup_popup_hide"]
