@@ -30,11 +30,13 @@ const card_base = preload('res://scenes/card_base.tscn')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hero2.change_hero(DatabaseService.get_hero(2))
+	$Background.texture = load("res://src/background_arts/" + str(DatabaseService.get_current_room()) + ".jpg")
+	$Background.scale *= get_viewport().get_visible_rect().size / $Background.texture.get_size()
+	
+	hero2.change_hero(DatabaseService.get_hero(randi_range(2,3)))
 	
 	cur_mana.text = "5"
 	max_mana.text = "5"
-	randomize()
 	
 	enemy_deck = DatabaseService.get_enemy_deck(2)
 	enemy_deck.shuffle()

@@ -134,6 +134,7 @@ func _on_enter_button_button_down():
 				get_tree().change_scene_to_file("res://scenes/shop.tscn")
 	else:
 		DatabaseService.change_room(current_room)
+		DatabaseService.clear_completed_events()
 		get_tree().reload_current_scene()
 		global_position = Vector2(0, 0)
 		tile_map.visible = false

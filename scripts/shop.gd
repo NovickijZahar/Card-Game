@@ -10,6 +10,9 @@ var selected_lot
 
 
 func _ready():
+	$Background.texture = load("res://src/background_arts/" + str(DatabaseService.get_current_room()) + ".jpg")
+	$Background.scale *= get_viewport().get_visible_rect().size / $Background.texture.get_size()
+	
 	$DataContainer/Label2.text = str(DatabaseService.get_money()) + '$'
 	var all_cards = DatabaseService.get_all_cards(true)
 	all_cards.shuffle()

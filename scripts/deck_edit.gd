@@ -10,6 +10,9 @@ var collection_card = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Background.texture = load("res://src/book.jpg")
+	$Background.scale *= get_viewport().get_visible_rect().size / $Background.texture.get_size()
+	
 	var deck = DatabaseService.get_deck()
 	for c in deck:
 		var card = card_base.instantiate()

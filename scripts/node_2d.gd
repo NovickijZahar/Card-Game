@@ -71,7 +71,8 @@ func _on_start_button_pressed():
 	database.create_table("Heroes", hero_table)
 	database.insert_rows("Heroes", 
 	[{"name":"Поврежденный рыцарь", "image_name": "Hero.webp", "deck": "[]"},
-	{"name":"Странник", "image_name": "Stranger.webp", "deck": "[5,6,7,8,9,10]"}])
+	{"name":"Странник", "image_name": "Stranger.webp", "deck": "[5,6,7,8,9,10]"},
+	{"name":"Рыцарь света", "image_name": "KnightOfLight.webp", "deck": "[1,2,5,6,7,8]"}])
 	
 	var feature_table = {
 		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},

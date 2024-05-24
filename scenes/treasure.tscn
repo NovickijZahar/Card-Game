@@ -5,6 +5,9 @@
 [node name="Treasure" type="Node2D"]
 script = ExtResource("1_lmphc")
 
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 537.0
 offset_top = 455.0

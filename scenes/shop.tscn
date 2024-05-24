@@ -5,6 +5,9 @@
 [node name="shop" type="Node2D"]
 script = ExtResource("1_ejk4j")
 
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+
 [node name="ReturnButton" type="Button" parent="."]
 offset_left = 1665.0
 offset_top = 69.0
@@ -24,23 +27,17 @@ columns = 2
 
 [node name="Label" type="Label" parent="DataContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.85098, 0.380392, 0.188235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Золото"
 
 [node name="Label2" type="Label" parent="DataContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.85098, 0.380392, 0.188235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "0$"
-
-[node name="Label3" type="Label" parent="DataContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Опыт"
-
-[node name="Label4" type="Label" parent="DataContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "0"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 483.0

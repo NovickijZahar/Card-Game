@@ -10,6 +10,9 @@
 [node name="test" type="Node2D"]
 script = ExtResource("1_mds67")
 
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+
 [node name="EndTurn" type="Button" parent="."]
 offset_left = 1627.0
 offset_top = 578.0

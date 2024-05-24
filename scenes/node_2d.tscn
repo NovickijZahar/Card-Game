@@ -20,7 +20,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
-text = "Начать"
+text = "Новая игра"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)

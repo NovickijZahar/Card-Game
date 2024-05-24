@@ -5,6 +5,9 @@
 [node name="DeckEdit" type="Node2D"]
 script = ExtResource("1_wu1pw")
 
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+
 [node name="ScrollContainer2" type="ScrollContainer" parent="."]
 offset_left = 1287.0
 offset_top = 177.0

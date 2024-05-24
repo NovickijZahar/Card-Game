@@ -6,6 +6,9 @@ var selected_card
 
 
 func _ready():
+	$Background.texture = load("res://src/background_arts/" + str(DatabaseService.get_current_room()) + ".jpg")
+	$Background.scale *= get_viewport().get_visible_rect().size / $Background.texture.get_size()
+	
 	var all_cards = DatabaseService.get_all_cards(true)
 	randomize()
 	all_cards.shuffle()
