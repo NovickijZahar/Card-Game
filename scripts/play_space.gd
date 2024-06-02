@@ -24,32 +24,43 @@ var card_index = 0
 var enemy_index = 0
 var earned_money = randi_range(10, 50)
 
+var boss_id = 0
+
 var data
 const card_base = preload('res://scenes/card_base.tscn')
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$Background.texture = load("res://src/background_arts/" + str(DatabaseService.get_current_room()) + ".jpg")
 	$Background.scale *= get_viewport().get_visible_rect().size / $Background.texture.get_size()
 	
-	hero2.change_hero(DatabaseService.get_hero(randi_range(2,3)))
+	boss_id = DatabaseService.get_current_boss_id()
+	if boss_id == 0:
+		hero2.change_hero(DatabaseService.get_hero(randi_range(2,3)))
+		enemy_deck = DatabaseService.get_enemy_deck(2)
+	else:
+		hero2.change_hero(DatabaseService.get_boss(boss_id))
+		enemy_deck = DatabaseService.get_boss_deck(boss_id)
+		$BossTooltip.visible = true
+		$BossTooltip.tooltip_text = hero2.hero.feature
 	
+	
+	
+	enemy_deck.shuffle()
+
 	cur_mana.text = "5"
 	max_mana.text = "5"
 	
-	enemy_deck = DatabaseService.get_enemy_deck(2)
-	enemy_deck.shuffle()
-
 	data = DatabaseService.get_deck()
 	data.shuffle()
 	
-	enemy_play()
+	#enemy_play()
+	#enemy_play()
 
 
+	await draw_card()
+	await draw_card()
 	
-	await draw_card()
-	await draw_card()
 
 func _process(delta):
 	for i in range(hand_cards.size()):
@@ -100,27 +111,34 @@ func player_turn():
 		for j in range(player_board[0].size()):
 			if player_board[i][j] != null:
 				player_board[i][j].position.x += 20
-				await get_tree().create_timer(0.3).timeout
+				await get_tree().create_timer(0.5).timeout
 				player_board[i][j].position.x -= 20
 				var features = DatabaseService.get_features(JSON.parse_string(player_board[i][j].card.description))
 				if enemy_board[0][j] != null:
-					if enemy_board[0][j].get_damage(player_board[i][j].deal_damage()):
-						await get_tree().create_timer(0.3).timeout
+					if await enemy_board[0][j].get_damage(player_board[i][j].deal_damage()):
+						await get_tree().create_timer(0.5).timeout
 						remove_child(enemy_board[0][j])
 						enemy_board[0][j] = null
 					if "Цепная атака" in features:
 						if enemy_board[1][j] != null:
-							if enemy_board[1][j].get_damage(player_board[i][j].deal_damage()):
-								await get_tree().create_timer(0.3).timeout
+							if await enemy_board[1][j].get_damage(player_board[i][j].deal_damage()):
+								await get_tree().create_timer(0.5).timeout
 								remove_child(enemy_board[1][j])
 								enemy_board[1][j] = null
 				elif enemy_board[1][j] != null:
-					if enemy_board[1][j].get_damage(player_board[i][j].deal_damage()):
-						await get_tree().create_timer(0.3).timeout
+					if await enemy_board[1][j].get_damage(player_board[i][j].deal_damage()):
+						await get_tree().create_timer(0.5).timeout
 						remove_child(enemy_board[1][j])
 						enemy_board[1][j] = null
 				else:
-					hero2.change_hp(-player_board[i][j].deal_damage())
+					if boss_id == 3:
+						$BossTooltip/ColorRect.visible = true
+						await get_tree().create_timer(0.5).timeout 
+						hero2.change_hp(-player_board[i][j].deal_damage() + 1)
+						await get_tree().create_timer(0.5).timeout 
+						$BossTooltip/ColorRect.visible = false
+					else:
+						hero2.change_hp(-player_board[i][j].deal_damage())
 				if "Разогрев" in features:
 					player_board[i][j].change_stats(1, 1)
 
@@ -129,17 +147,17 @@ func enemy_turn():
 		for j in range(enemy_board[0].size()):
 			if enemy_board[i][j] != null:
 				enemy_board[i][j].position.x -= 20
-				await get_tree().create_timer(0.3).timeout
+				await get_tree().create_timer(0.5).timeout
 				enemy_board[i][j].position.x += 20
 				if player_board[0][j] != null:
-					if player_board[0][j].get_damage(enemy_board[i][j].deal_damage()):
-						await get_tree().create_timer(0.3).timeout
+					if await player_board[0][j].get_damage(enemy_board[i][j].deal_damage()):
+						await get_tree().create_timer(0.5).timeout
 						remove_child(player_board[0][j])
 						slots[0][j].occupied = false
 						player_board[0][j] = null
 				elif player_board[1][j] != null:
-					if player_board[1][j].get_damage(enemy_board[i][j].deal_damage()):
-						await get_tree().create_timer(0.3).timeout
+					if await player_board[1][j].get_damage(enemy_board[i][j].deal_damage()):
+						await get_tree().create_timer(0.5).timeout
 						remove_child(player_board[1][j])
 						slots[1][j].occupied = false
 						player_board[1][j] = null
@@ -175,6 +193,10 @@ func _on_end_turn_pressed():
 	enemy_play()
 	await enemy_turn()
 	await get_tree().create_timer(0.5).timeout
+	if boss_id != 0:
+		await boss_feature()
+	await get_tree().create_timer(0.5).timeout
+	
 	
 	if int(max_mana.text) != 10:
 		max_mana.text = str(int(max_mana.text) + 1)
@@ -187,6 +209,42 @@ func _on_end_turn_pressed():
 			hand_cards[i].is_enable = true
 	
 	$EndTurn.disabled = false
+
+
+func boss_feature():
+	match boss_id:
+		1: 
+			$BossTooltip/ColorRect.visible = true
+			await get_tree().create_timer(0.5).timeout 
+			hero1.change_hp(-1)
+			for i in range(player_board.size()):
+				for j in range(player_board[0].size()):
+					if player_board[i][j] != null:
+						if await player_board[i][j].get_damage(1):
+							await get_tree().create_timer(0.5).timeout
+							remove_child(player_board[i][j])
+							slots[i][j].occupied = false
+							player_board[i][j] = null
+		2:
+			$BossTooltip/ColorRect.visible = true
+			await get_tree().create_timer(0.5).timeout 
+			var free_slots = []
+			for i in range(2):
+				for j in range(3):
+					if enemy_board[i][j] == null:
+						free_slots.append([i, j])
+			var ri = randi_range(0, 1)
+			var rj = randf_range(0, 2)
+			var res = free_slots.pick_random()
+			if res != null and player_board[ri][rj] != null:
+				player_board[ri][rj].position = enemy_board_position[res[0]][res[1]]
+				enemy_board[res[0]][res[1]] = player_board[ri][rj]
+				slots[ri][rj].occupied = false
+				player_board[ri][rj] = null
+				
+	
+	await get_tree().create_timer(0.5).timeout
+	$BossTooltip/ColorRect.visible = false
 
 
 func _on_button_pressed():
@@ -202,3 +260,4 @@ func _on_popup_popup_hide():
 		get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
 	else:
 		get_tree().change_scene_to_file("res://scenes/map.tscn")
+	DatabaseService.set_current_boss(0)

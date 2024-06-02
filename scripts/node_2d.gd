@@ -31,7 +31,7 @@ func _on_start_button_pressed():
 	database.create_table("CardDataBase", card_table)
 	database.insert_rows("CardDataBase", 
 		[arr_to_dict(['Killer', 'Killer.png', AbstractCard.Rarity.Common, 2, 5, 1, [1]]),
-		arr_to_dict(['Warrior', 'Warrior.png', AbstractCard.Rarity.Rare, 2, 3, 4]),
+		arr_to_dict(['Warrior', 'Warrior.png', AbstractCard.Rarity.Rare, 2, 3, 4, [5]]),
 		arr_to_dict(['Spirit', 'Spirit.webp', AbstractCard.Rarity.Epic, 5, 7, 7]),
 		arr_to_dict(['Shadow', 'ShadowWarrior.png', AbstractCard.Rarity.Rare, 6, 6, 6]),
 		arr_to_dict(['Dragon', 'Dragon.webp', AbstractCard.Rarity.Legendary, 8, 10, 10]),
@@ -53,7 +53,8 @@ func _on_start_button_pressed():
 		"map_position_x": {"data_type": "real", "default": 0.0},
 		"map_position_y": {"data_type": "real", "default": 0.0},
 		"completed_events": {"data_type": "text", "default": "[]"},
-		"current_location": {"data_type": "int", "default": 1}
+		"current_location": {"data_type": "int", "default": 1},
+		"current_boss": {"data_type": "int", "default": 0}
 	}
 	database.drop_table("Player")
 	database.create_table("Player", player_table)
@@ -73,6 +74,22 @@ func _on_start_button_pressed():
 	[{"name":"Поврежденный рыцарь", "image_name": "Hero.webp", "deck": "[]"},
 	{"name":"Странник", "image_name": "Stranger.webp", "deck": "[5,6,7,8,9,10]"},
 	{"name":"Рыцарь света", "image_name": "KnightOfLight.webp", "deck": "[1,2,5,6,7,8]"}])
+	
+	var boss_table = {
+		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},
+		"name": {"data_type": "text"},
+		"image_name":  {"data_type": "text"},
+		"deck": {"data_type": "text", "default": "[]"},
+		"hp": {"data_type": "int", "default": 30},
+		"feature": {"data_type": "text"}
+	}
+	database.drop_table("Bosses")
+	database.create_table("Bosses", boss_table)
+	database.insert_rows("Bosses",
+	[{"name":"Смерть", "image_name": "Death.webp", "deck": "[5,6,7,8,9,10]", "feature": "Наносит 1 ед. урона герою противника в конце своего хода"},
+	{"name":"Повелительница разума", "image_name": "MasterOfTheMind.webp", "deck": "[5,6,7,8,9,10]", "feature": "В конце своего хода переманивает карту противника со случанойго места(в том числе пустого)"},
+	{"name":"Черепаший король", "image_name": "TurtleKing.webp", "deck": "[5,6,7,8,9,10]", "feature": "Получает на 1 ед. урона меньше от любого источника"}])
+	
 	
 	var feature_table = {
 		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},

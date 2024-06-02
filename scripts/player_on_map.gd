@@ -10,11 +10,11 @@ var tile_map
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var is_moving: bool
-var speed: int = 800
+var speed: int = 1000
 var current_pos: Vector2
 var current_loc = Locations.None
-var current_room = Rooms.None
-var is_loc: bool
+var current_room = 1
+var current_boss = 0
 
 var flag = true
 
@@ -26,13 +26,16 @@ enum Locations
 	Shop
 }
 
-enum Rooms
+enum State
 {
 	None,
-	Lava,
-	Snow,
-	Desert
+	Location,
+	Room,
+	Boss
 }
+
+var current_state = State.None
+
 
 
 func _ready():
@@ -104,12 +107,17 @@ func _physics_process(delta):
 						enter_button.visible = true
 						enter_button.text = "Войти"
 						current_loc = tile_map.get_cell_tile_data(0, current_pos).get_custom_data("event")
-						is_loc = true
+						current_state = State.Location
 					elif tile_map.get_cell_tile_data(0, current_pos).get_custom_data("location") != 0:
 						enter_button.visible = true
 						enter_button.text = "Перейти в следующую локацию"
 						current_room = tile_map.get_cell_tile_data(0, current_pos).get_custom_data("location")
-						is_loc = false
+						current_state = State.Room
+					elif tile_map.get_cell_tile_data(0, current_pos).get_custom_data("boss") != 0:
+						enter_button.visible = true
+						enter_button.text = "Сразиться с боссом"
+						current_boss = tile_map.get_cell_tile_data(0, current_pos).get_custom_data("boss")
+						current_state = State.Boss
 
 
 func _on_deck_edit_button_down():
@@ -121,7 +129,7 @@ func _on_deck_edit_button_down():
 
 func _on_enter_button_button_down():
 	flag = false
-	if is_loc:
+	if current_state == State.Location:
 		DatabaseService.set_map_position(global_position)
 		match current_loc:
 			Locations.Treasure:
@@ -132,14 +140,46 @@ func _on_enter_button_button_down():
 				DatabaseService.add_completed_event(current_pos)
 			Locations.Shop:
 				get_tree().change_scene_to_file("res://scenes/shop.tscn")
-	else:
-		DatabaseService.change_room(current_room)
-		DatabaseService.clear_completed_events()
-		get_tree().reload_current_scene()
-		global_position = Vector2(0, 0)
-		tile_map.visible = false
-		DatabaseService.set_map_position(global_position)
+	elif current_state == State.Room:
+		var res = get_all_battles()
+		if res == 0:
+			DatabaseService.change_room(current_room)
+			DatabaseService.clear_completed_events()
+			get_tree().reload_current_scene()
+			tile_map.visible = false
+			DatabaseService.set_map_position(Vector2(0, 0))
+		else:
+			$"../Popup/CenterContainer/Label".text = 'Для перехода в следующую локацию вы должны победить всех противников на этой локации\n(Осталось ' + str(res) + ')'
+			$"../Popup".popup(Rect2i(500, 300, 920, 460))
+	elif current_state == State.Boss:
+		var res = get_all_battles()
+		if res == 0:
+			get_tree().change_scene_to_file("res://scenes/play_space.tscn")
+			DatabaseService.set_current_boss(current_boss)
+			DatabaseService.clear_completed_events()
+			DatabaseService.set_map_position(Vector2(0, 0))
+			tile_map.visible = false
+		else:
+			$"../Popup/CenterContainer/Label".text = 'Для сражения с боссом вы должны победить всех противников на этой локации\n(Осталось ' + str(res) + ')'
+			$"../Popup".popup(Rect2i(500, 300, 920, 460))
+
+func get_all_battles():
+	var res = 0
+	for x in tile_map.get_used_rect().size.x:
+		for y in tile_map.get_used_rect().size.y:
+			var tile_position = Vector2i(
+				x + tile_map.get_used_rect().position.x,
+				y + tile_map.get_used_rect().position.y
+			)
+			var tile_data = tile_map.get_cell_tile_data(0, tile_position)
+			if tile_data != null and tile_data.get_custom_data("event") == Locations.Enemy:
+				res += 1
+	return res
 
 
 func _on_menu_button_button_down():
 	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+
+
+func _on_popup_popup_hide():
+	flag = true

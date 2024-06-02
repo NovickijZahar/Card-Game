@@ -17,11 +17,15 @@ func _ready():
 	$Bars/DescrBar/DescrLabel.text = DatabaseService.get_features(JSON.parse_string(card.description), true)
 	$Bars/TopBar/ManaBar/ManaLabel.text = str(card.manacost)
 	tooltip_text = DatabaseService.get_features_tooltip(JSON.parse_string(card.description))
-
+	
 
 func get_damage(damage) -> bool:
 	$Bars/BottomBar/HpBar/HpLabel.text = \
 		str(int($Bars/BottomBar/HpBar/HpLabel.text) - damage)
+	$Node2D.visible = true
+	$Node2D/Label.text = '-' + str(damage)
+	await get_tree().create_timer(0.5).timeout
+	$Node2D.visible = false
 	if int($Bars/BottomBar/HpBar/HpLabel.text) <= 0:
 		return true
 	return false

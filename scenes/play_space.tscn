@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://djljptxmkbwj6"]
+[gd_scene load_steps=8 format=3 uid="uid://djljptxmkbwj6"]
 
 [ext_resource type="PackedScene" uid="uid://bp7n5ww0e441n" path="res://scenes/card_slot.tscn" id="1_bnbr6"]
 [ext_resource type="Script" path="res://scripts/play_space.gd" id="1_mds67"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8cbc3e0yiymm" path="res://src/EnemyBg.png" id="4_2td2w"]
 [ext_resource type="Texture2D" uid="uid://degocvjnso5mw" path="res://src/card_back.png" id="5_whoj4"]
 [ext_resource type="PackedScene" uid="uid://b2ee2cxy7mpai" path="res://scenes/hero_base.tscn" id="6_obgaq"]
+[ext_resource type="Texture2D" uid="uid://bbn14r57ymv7p" path="res://src/boss_icon.png" id="7_dcf7u"]
 
 [node name="test" type="Node2D"]
 script = ExtResource("1_mds67")
@@ -217,9 +218,9 @@ vertical_alignment = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
 offset_left = 1468.0
-offset_top = 221.0
+offset_top = 192.0
 offset_right = 1693.0
-offset_bottom = 264.0
+offset_bottom = 235.0
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer3"]
 layout_mode = 2
@@ -232,6 +233,22 @@ theme_override_font_sizes/font_size = 30
 text = "Противник"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BossTooltip" type="MarginContainer" parent="."]
+visible = false
+offset_left = 1734.0
+offset_top = 265.0
+offset_right = 1895.0
+offset_bottom = 441.0
+
+[node name="ColorRect" type="ColorRect" parent="BossTooltip"]
+visible = false
+layout_mode = 2
+color = Color(0.863436, 5.31845e-06, 7.70092e-07, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="BossTooltip"]
+position = Vector2(83, 90)
+texture = ExtResource("7_dcf7u")
 
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

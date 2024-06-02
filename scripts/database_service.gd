@@ -22,7 +22,17 @@ func get_enemy_deck(id):
 	for c in JSON.parse_string(row):
 		res.append(get_card(c))
 	return res
-
+	
+func get_boss_deck(id):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var row = database.select_rows("Bosses", "id=="+str(id), ["deck"])[0]["deck"]
+	var res = []
+	for c in JSON.parse_string(row):
+		res.append(get_card(c))
+	return res
+	
 func get_deck():
 	var database = SQLite.new()
 	database.path = 'res://data.db'
@@ -184,3 +194,23 @@ func get_current_room():
 	database.path = 'res://data.db'
 	database.open_db()
 	return database.select_rows("Player", "id==1", ["current_location"])[0]["current_location"]
+
+func set_current_boss(new_boss: int):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	database.update_rows("Player", "id==1", {"current_boss": new_boss})
+
+func get_current_boss_id():
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	return database.select_rows("Player", "id==1", ["current_boss"])[0]["current_boss"]
+
+func get_boss(id: int):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var row = database.select_rows("Bosses", "id="+str(id), ["*"])[0]
+	return Boss.new(row["name"], row["image_name"],
+					JSON.parse_string(row["deck"]), row["hp"], row["feature"])
