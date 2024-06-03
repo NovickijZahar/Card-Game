@@ -66,19 +66,29 @@ func _on_start_button_pressed():
 		"name": {"data_type": "text"},
 		"image_name":  {"data_type": "text"},
 		"deck": {"data_type": "text", "default": "[]"},
-		"hp": {"data_type": "int", "default": 30}
+		"hp": {"data_type": "int", "default": 30},
+		"location": {"data_type": "int", "default": 0}
 	}
 	database.drop_table("Heroes")
 	database.create_table("Heroes", hero_table)
 	database.insert_rows("Heroes", 
 	[{"name":"Поврежденный рыцарь", "image_name": "Hero.webp", "deck": "[]"},
-	{"name":"Странник", "image_name": "Stranger.webp", "deck": "[5,6,7,8,9,10]"},
-	{"name":"Рыцарь света", "image_name": "KnightOfLight.webp", "deck": "[1,2,5,6,7,8]"}])
+	{"name":"Странник", "image_name": "Stranger.webp", "deck": "[5,6,7,8,9,10]", "location": 1},
+	{"name":"Рыцарь света", "image_name": "KnightOfLight.webp", "deck": "[1,2,5,6,7,8]", "location": 1},
+	{"name": "Огненный дракон", "image_name": "LavaDragon.png", "deck": "[1,2,5,6,7,8]", "location": 2},
+	{"name": "Командир огенного батальона", "image_name": "FireBattalionCommander.png", "deck": "[1,2,5,6,7,8]", "location": 2},
+	{"name": "Лорд льда", "image_name": "IceLord.png", "deck": "[1,2,5,6,7,8]", "location": 3},
+	{"name": "Снежный рыцарь", "image_name": "SnowKnight.png", "deck": "[1,2,5,6,7,8]", "location": 3},
+	{"name": "Вестник смерти", "image_name": "HarbingerOfDeath.png", "deck": "[1,2,5,6,7,8]", "location": 4},
+	{"name": "Песчаный маг", "image_name": "SandWizzard.png", "deck": "[1,2,5,6,7,8]", "location": 4},
+	{"name": "Первый жнец", "image_name": "FirstReaper.png", "deck": "[1,2,5,6,7,8]", "location": 5},
+	{"name": "Всадники смерти", "image_name": "HorsemenOfDeath.png", "deck": "[1,2,5,6,7,8]", "location": 5}])
 	
 	var boss_table = {
 		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},
 		"name": {"data_type": "text"},
-		"image_name":  {"data_type": "text"},
+		"image_name": {"data_type": "text"},
+		"icon_path": {"data_type": "text"},
 		"deck": {"data_type": "text", "default": "[]"},
 		"hp": {"data_type": "int", "default": 30},
 		"feature": {"data_type": "text"}
@@ -86,9 +96,10 @@ func _on_start_button_pressed():
 	database.drop_table("Bosses")
 	database.create_table("Bosses", boss_table)
 	database.insert_rows("Bosses",
-	[{"name":"Смерть", "image_name": "Death.webp", "deck": "[5,6,7,8,9,10]", "feature": "Наносит 1 ед. урона герою противника в конце своего хода"},
-	{"name":"Повелительница разума", "image_name": "MasterOfTheMind.webp", "deck": "[5,6,7,8,9,10]", "feature": "В конце своего хода переманивает карту противника со случанойго места(в том числе пустого)"},
-	{"name":"Черепаший король", "image_name": "TurtleKing.webp", "deck": "[5,6,7,8,9,10]", "feature": "Получает на 1 ед. урона меньше от любого источника"}])
+	[{"name":"Лавовый лорд", "image_name": "LavaLord.png", "icon_path" : "LavaLordIcon.webp", "deck": "[5,6,7,8,9,10]", "feature": "Увеличивает атаку своих карт на 1 в конце своего хода"},
+	{"name":"Повелительница разума", "image_name": "MasterOfTheMind.webp", "icon_path" : "MasterOfTheMindIcon.png", "deck": "[5,6,7,8,9,10]", "feature": "В конце своего хода переманивает карту противника со случанойго места(в том числе пустого)"},
+	{"name":"Черепаший король", "image_name": "TurtleKing.webp", "icon_path" : "TurtleKingIcon.webp", "deck": "[5,6,7,8,9,10]", "feature": "Получает на 1 ед. урона меньше от любого источника"},
+	{"name":"Смерть", "image_name": "Death.webp", "icon_path" : "DeathIcon.png", "deck": "[5,6,7,8,9,10]", "feature": "Наносит 1 ед. урона всем противникам в конце своего хода"}])
 	
 	
 	var feature_table = {

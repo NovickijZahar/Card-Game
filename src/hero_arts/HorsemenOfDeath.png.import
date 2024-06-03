@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbn14r57ymv7p"
-path="res://.godot/imported/boss_icon.png-9d35d0760d1ae70a776033b4096eb4ed.ctex"
+uid="uid://57vfrff72o75"
+path="res://.godot/imported/HorsemenOfDeath.png-d7ab3b359ce13f796cd79aa8bd66f7d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/boss_icon.png"
-dest_files=["res://.godot/imported/boss_icon.png-9d35d0760d1ae70a776033b4096eb4ed.ctex"]
+source_file="res://src/hero_arts/HorsemenOfDeath.png"
+dest_files=["res://.godot/imported/HorsemenOfDeath.png-d7ab3b359ce13f796cd79aa8bd66f7d7.ctex"]
 
 [params]
 

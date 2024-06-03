@@ -21,7 +21,7 @@ func _ready():
 		var c = card_lot.instantiate()
 		c.get_child(0).card = card
 		c.get_child(0).is_enable = false
-		c.get_child(0).get_child(4).get_child(1).get_child(1).text = str(randi_range(50, 150))
+		c.get_child(0).get_child(5).get_child(1).get_child(1).text = str(randi_range(50, 150))
 		container.add_child(c)
 		i += 1
 		if i == 2:
@@ -36,7 +36,7 @@ func _process(delta):
 		selected_card.get_child(0).get_child(0).visible = true
 	for c in container.get_children():
 		if c.get_child(0) == selected_card:
-			selected_price = int(c.get_child(0).get_child(4).get_child(1).get_child(1).text)
+			selected_price = int(c.get_child(0).get_child(5).get_child(1).get_child(1).text)
 			selected_lot = c
 			if DatabaseService.get_money() < selected_price:
 				selected_card.get_child(0).get_child(0).color = Color('ff301a')

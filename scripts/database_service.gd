@@ -156,6 +156,16 @@ func get_hero(id: int):
 	return Hero.new(row["name"], row["image_name"],
 					JSON.parse_string(row["deck"]), row["hp"])
 
+func get_random_hero_in_current_room():
+	var room_id = get_current_room()
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var rows = database.select_rows("Heroes", "location="+str(room_id), ["*"])
+	var row = rows.pick_random()
+	return Hero.new(row["name"], row["image_name"],
+					JSON.parse_string(row["deck"]), row["hp"])
+
 func get_features(arr: Array, to_string=false):
 	var database = SQLite.new()
 	database.path = 'res://data.db'
@@ -213,4 +223,4 @@ func get_boss(id: int):
 	database.open_db()
 	var row = database.select_rows("Bosses", "id="+str(id), ["*"])[0]
 	return Boss.new(row["name"], row["image_name"],
-					JSON.parse_string(row["deck"]), row["hp"], row["feature"])
+					JSON.parse_string(row["deck"]), row["hp"], row["feature"], row["icon_path"])

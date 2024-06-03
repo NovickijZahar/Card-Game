@@ -6,6 +6,7 @@ var tile_map
 @onready var tile_map2 = $"../TileMap2"
 @onready var tile_map3 = $"../TileMap3"
 @onready var tile_map4 = $"../TileMap4"
+@onready var tile_map5 = $"../TileMap5"
 @onready var enter_button = $Camera2D/EnterButton
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
@@ -44,6 +45,7 @@ func _ready():
 		2: tile_map = tile_map2
 		3: tile_map = tile_map3
 		4: tile_map = tile_map4
+		5: tile_map = tile_map5
 	tile_map.visible = true
 	$Camera2D/GridContainer/Label2.text = str(DatabaseService.get_money()) + '$'
 	global_position = DatabaseService.get_map_position()
@@ -53,7 +55,7 @@ func _ready():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(32, 32)
-	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
 	astar_grid.update()
 	for x in tile_map.get_used_rect().size.x:
 		for y in tile_map.get_used_rect().size.y:

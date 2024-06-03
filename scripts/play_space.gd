@@ -36,16 +36,17 @@ func _ready():
 	
 	boss_id = DatabaseService.get_current_boss_id()
 	if boss_id == 0:
-		hero2.change_hero(DatabaseService.get_hero(randi_range(2,3)))
+		hero2.change_hero(DatabaseService.get_random_hero_in_current_room())
 		enemy_deck = DatabaseService.get_enemy_deck(2)
 	else:
 		hero2.change_hero(DatabaseService.get_boss(boss_id))
 		enemy_deck = DatabaseService.get_boss_deck(boss_id)
+		$BossTooltip/Sprite2D.texture = load(hero2.hero.icon_path)
+		$BossTooltip/Sprite2D.scale *= Vector2(150, 150) / $BossTooltip/Sprite2D.texture.get_size()
 		$BossTooltip.visible = true
-		$BossTooltip.tooltip_text = hero2.hero.feature
-	
-	
-	
+		$BossTooltip/ColorRect.color = Color('7b6a63')
+		$BossTooltip/ColorRect.tooltip_text = hero2.hero.feature
+
 	enemy_deck.shuffle()
 
 	cur_mana.text = "5"
@@ -85,7 +86,10 @@ func _process(delta):
 		$Popup.popup(Rect2i(450, 250, 1020, 560))
 	if hero2.get_hp() <= 0:
 		DatabaseService.add_money(earned_money)
-		$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
+		if boss_id == 4:
+			$Popup/CenterContainer/Label.text = 'Вы прошли игру.'
+		else:
+			$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
 		$Popup.popup(Rect2i(450, 250, 1020, 560))
 	
 	
@@ -132,11 +136,11 @@ func player_turn():
 						enemy_board[1][j] = null
 				else:
 					if boss_id == 3:
-						$BossTooltip/ColorRect.visible = true
+						$BossTooltip/ColorRect.color = Color('e00000')
 						await get_tree().create_timer(0.5).timeout 
 						hero2.change_hp(-player_board[i][j].deal_damage() + 1)
 						await get_tree().create_timer(0.5).timeout 
-						$BossTooltip/ColorRect.visible = false
+						$BossTooltip/ColorRect.color = Color('7b6a63')
 					else:
 						hero2.change_hp(-player_board[i][j].deal_damage())
 				if "Разогрев" in features:
@@ -213,8 +217,15 @@ func _on_end_turn_pressed():
 
 func boss_feature():
 	match boss_id:
-		1: 
-			$BossTooltip/ColorRect.visible = true
+		1:
+			$BossTooltip/ColorRect.color = Color('e00000')
+			await get_tree().create_timer(0.5).timeout 
+			for i in range(enemy_board.size()):
+				for j in range(enemy_board[0].size()):
+					if enemy_board[i][j] != null:
+						enemy_board[i][j].change_stats(1, 0)
+		4: 
+			$BossTooltip/ColorRect.color = Color('e00000')
 			await get_tree().create_timer(0.5).timeout 
 			hero1.change_hp(-1)
 			for i in range(player_board.size()):
@@ -226,7 +237,7 @@ func boss_feature():
 							slots[i][j].occupied = false
 							player_board[i][j] = null
 		2:
-			$BossTooltip/ColorRect.visible = true
+			$BossTooltip/ColorRect.color = Color('e00000')
 			await get_tree().create_timer(0.5).timeout 
 			var free_slots = []
 			for i in range(2):
@@ -244,7 +255,7 @@ func boss_feature():
 				
 	
 	await get_tree().create_timer(0.5).timeout
-	$BossTooltip/ColorRect.visible = false
+	$BossTooltip/ColorRect.color = Color('7b6a63')
 
 
 func _on_button_pressed():
@@ -256,8 +267,13 @@ func _on_button_pressed():
 
 
 func _on_popup_popup_hide():
+	DatabaseService.set_current_boss(0)
 	if hero1.get_hp() <= 0:
 		get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
 	else:
+		if boss_id in range(1, 4):
+			DatabaseService.change_room(5)
+		elif boss_id == 4:
+			get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+			return 
 		get_tree().change_scene_to_file("res://scenes/map.tscn")
-	DatabaseService.set_current_boss(0)

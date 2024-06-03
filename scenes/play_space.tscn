@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8cbc3e0yiymm" path="res://src/EnemyBg.png" id="4_2td2w"]
 [ext_resource type="Texture2D" uid="uid://degocvjnso5mw" path="res://src/card_back.png" id="5_whoj4"]
 [ext_resource type="PackedScene" uid="uid://b2ee2cxy7mpai" path="res://scenes/hero_base.tscn" id="6_obgaq"]
-[ext_resource type="Texture2D" uid="uid://bbn14r57ymv7p" path="res://src/boss_icon.png" id="7_dcf7u"]
+[ext_resource type="Texture2D" uid="uid://bbn14r57ymv7p" path="res://src/boss_icons/DeathIcon.png" id="7_dcf7u"]
 
 [node name="test" type="Node2D"]
 script = ExtResource("1_mds67")
@@ -110,14 +110,6 @@ theme_override_font_sizes/font_size = 30
 text = "Выйти"
 
 [node name="Popup" type="Popup" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Popup"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.921569, 0.643137, 0.368627, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="Popup"]
 anchors_preset = 15
@@ -242,9 +234,8 @@ offset_right = 1895.0
 offset_bottom = 441.0
 
 [node name="ColorRect" type="ColorRect" parent="BossTooltip"]
-visible = false
 layout_mode = 2
-color = Color(0.863436, 5.31845e-06, 7.70092e-07, 1)
+color = Color(0.877315, 0.000267318, 0.000145932, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="BossTooltip"]
 position = Vector2(83, 90)
