@@ -37,7 +37,9 @@ func _on_choose_button_pressed():
 		DatabaseService.add_to_colletion(selected_card.card.name)
 		$Popup/CenterContainer/Label.text = 'Вы получили ' + selected_card.card.name
 		$Popup.popup(Rect2i(500, 300, 920, 460))
-
+	if container.get_children().size() == 0:
+		$Popup/CenterContainer/Label.text = 'У вас уже есть все карты в коллекции'
+		$Popup.popup(Rect2i(500, 300, 920, 460))
 
 
 func _on_popup_popup_hide():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwvnrt8a52j43"
-path="res://.godot/imported/IceLord.png-39c816ffcc6d10d8f54723c351bb72dc.ctex"
+uid="uid://c6y3utvh0nwv"
+path="res://.godot/imported/IceServant.png-a9568211980967bba187fc236f918bf1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/card_arts/minion/IceLord.png"
-dest_files=["res://.godot/imported/IceLord.png-39c816ffcc6d10d8f54723c351bb72dc.ctex"]
+source_file="res://src/card_arts/minion/IceServant.png"
+dest_files=["res://.godot/imported/IceServant.png-a9568211980967bba187fc236f918bf1.ctex"]
 
 [params]
 

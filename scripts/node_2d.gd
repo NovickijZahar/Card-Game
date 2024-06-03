@@ -30,16 +30,21 @@ func _on_start_button_pressed():
 	database.drop_table("CardDataBase")
 	database.create_table("CardDataBase", card_table)
 	database.insert_rows("CardDataBase", 
-		[arr_to_dict(['Killer', 'Killer.png', AbstractCard.Rarity.Common, 2, 5, 1, [1]]),
-		arr_to_dict(['Warrior', 'Warrior.png', AbstractCard.Rarity.Rare, 2, 3, 4, [5]]),
-		arr_to_dict(['Spirit', 'Spirit.webp', AbstractCard.Rarity.Epic, 5, 7, 7]),
-		arr_to_dict(['Shadow', 'ShadowWarrior.png', AbstractCard.Rarity.Rare, 6, 6, 6]),
-		arr_to_dict(['Dragon', 'Dragon.webp', AbstractCard.Rarity.Legendary, 8, 10, 10]),
-		arr_to_dict(['Baby dragon', 'DragonBaby.webp', AbstractCard.Rarity.Common, 1, 1, 2]),
-		arr_to_dict(['Druid', 'Druid.webp', AbstractCard.Rarity.Rare, 2, 3, 2]),
-		arr_to_dict(['Lion', 'Lion.webp', AbstractCard.Rarity.Rare, 4, 4, 4]),
-		arr_to_dict(['Owl', 'Owl.webp', AbstractCard.Rarity.Common, 1, 2, 1]),
-		arr_to_dict(['Demon', 'DemonKnight.webp', AbstractCard.Rarity.Epic, 3, 4, 3])])
+		[arr_to_dict(['Убийца', 'Killer.png', AbstractCard.Rarity.Common, 2, 5, 1]),
+		arr_to_dict(['Воин', 'Warrior.png', AbstractCard.Rarity.Rare, 2, 3, 4]),
+		arr_to_dict(['Дух', 'Spirit.webp', AbstractCard.Rarity.Epic, 5, 7, 7]),
+		arr_to_dict(['Тень', 'ShadowWarrior.png', AbstractCard.Rarity.Rare, 6, 6, 6]),
+		arr_to_dict(['Дракон', 'Dragon.webp', AbstractCard.Rarity.Legendary, 8, 10, 10]),
+		arr_to_dict(['Дракончик', 'DragonBaby.webp', AbstractCard.Rarity.Common, 1, 1, 2]),
+		arr_to_dict(['Друид', 'Druid.webp', AbstractCard.Rarity.Rare, 2, 3, 2]),
+		arr_to_dict(['Лев', 'Lion.webp', AbstractCard.Rarity.Rare, 4, 4, 4]),
+		arr_to_dict(['Сова', 'Owl.webp', AbstractCard.Rarity.Common, 1, 2, 1]),
+		arr_to_dict(['Демон', 'DemonKnight.webp', AbstractCard.Rarity.Epic, 3, 4, 3]),
+		arr_to_dict(['Вестники', 'DeathServants.png', AbstractCard.Rarity.Epic, 4, 5, 4]),
+		arr_to_dict(['Слуга льда', 'IceServant.png', AbstractCard.Rarity.Epic, 2, 3, 3]),
+		arr_to_dict(['Слуга снега', 'SnowServant.png', AbstractCard.Rarity.Epic, 5, 6, 5]),
+		arr_to_dict(['Застывший', 'SnowCommander.png', AbstractCard.Rarity.Epic, 7, 8, 8]),
+		arr_to_dict(['Лошадь', 'Horse.webp', AbstractCard.Rarity.Epic, 3, 1, 4])])
 	
 	database.update_rows("CardDataBase", 
 		"id==1 or id==2 or id==3 or id==4 or id==5 or id==6", 
@@ -77,12 +82,12 @@ func _on_start_button_pressed():
 	{"name":"Рыцарь света", "image_name": "KnightOfLight.webp", "deck": "[1,2,5,6,7,8]", "location": 1},
 	{"name": "Огненный дракон", "image_name": "LavaDragon.png", "deck": "[1,2,5,6,7,8]", "location": 2},
 	{"name": "Командир огенного батальона", "image_name": "FireBattalionCommander.png", "deck": "[1,2,5,6,7,8]", "location": 2},
-	{"name": "Лорд льда", "image_name": "IceLord.png", "deck": "[1,2,5,6,7,8]", "location": 3},
-	{"name": "Снежный рыцарь", "image_name": "SnowKnight.png", "deck": "[1,2,5,6,7,8]", "location": 3},
-	{"name": "Вестник смерти", "image_name": "HarbingerOfDeath.png", "deck": "[1,2,5,6,7,8]", "location": 4},
-	{"name": "Песчаный маг", "image_name": "SandWizzard.png", "deck": "[1,2,5,6,7,8]", "location": 4},
-	{"name": "Первый жнец", "image_name": "FirstReaper.png", "deck": "[1,2,5,6,7,8]", "location": 5},
-	{"name": "Всадники смерти", "image_name": "HorsemenOfDeath.png", "deck": "[1,2,5,6,7,8]", "location": 5}])
+	{"name": "Лорд льда", "image_name": "IceLord.png", "deck": "[7,6,3,12,13,14]", "location": 3},
+	{"name": "Снежный рыцарь", "image_name": "SnowKnight.png", "deck": "[8,9,11,12,13,14]", "location": 3},
+	{"name": "Вестник смерти", "image_name": "HarbingerOfDeath.png", "deck": "[11,2,5,6,7,8]", "location": 4},
+	{"name": "Песчаный маг", "image_name": "SandWizzard.png", "deck": "[4,2,5,6,7,8]", "location": 4},
+	{"name": "Первый жнец", "image_name": "FirstReaper.png", "deck": "[10,2,5,6,7,8]", "location": 5},
+	{"name": "Всадники смерти", "image_name": "HorsemenOfDeath.png", "deck": "[11,2,10,6,7,8]", "location": 5}])
 	
 	var boss_table = {
 		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},
@@ -105,25 +110,16 @@ func _on_start_button_pressed():
 	var feature_table = {
 		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},
 		"name": {"data_type": "text"},
-		"description": {"data_type": "text"},
-		"type": {"data_type": "text"}
+		"description": {"data_type": "text"}
 	}
 	database.drop_table("Features")
 	database.create_table("Features", feature_table)
 	database.insert_rows("Features", 
-	[{"name": "Цепная атака", "description": "Наносит урон карте противника и карте за ней", "type": "При атаке"},
-	{"name": "Ближний шквал", "description": "Наносит X урона всем существам противника на ближней линии", "type": "При атаке"},
-	{"name": "Дальний шквал", "description": "Наносит X урона всем существам противника на дальней линии", "type": "При атаке"},
-	{"name": "Шквал", "description": "Наносит X урона всем существам противника", "type": "При атаке"},
-	{"name": "Разогрев", "description": "После атаки получает +X к атаке и +Y к здоровью", "type": "При атаке"},
-	{"name": "Восстановление", "description": "Восстанавливает X здоровья всем союзным картам", "type": "При атаке"},
-	{"name": "Яд", "description": "Уничтожает карту, которой наносит урон", "type": "При атаке"},
-	{"name": "Отражение", "description": "Возвращает урон карте, которая нанесла урон этой карте", "type": "При получении урона"},
-	{"name": "Ближняя колючесть", "description": "Наносит X урона всем существам противника на ближней линии", "type": "При получении урона"},
-	{"name": "Дальняя колючесть", "description": "Наносит X урона всем существам противника на дальней линии", "type": "При получении урона"},
-	{"name": "Колючесть", "description": "Наносит X урона всем существам противника", "type": "При получении урона"},
-	{"name": "Перенаправление", "description": "Возвращает урон базе противника", "type": "При получении урона"},])
-	
+	[{"name": "Цепная атака", "description": "Наносит урон карте противника и карте за ней"},
+	{"name": "Разогрев", "description": "После атаки получает +1 к атаке и +1 к здоровью"},
+	{"name": "Ближний шквал", "description": "После атаки наносит 1 ед. урона ближним картам противника"},
+	{"name": "Дальний шквал", "description": "После атаки наносит 1 ед. урона дальним картам противника"},
+	{"name": "Безумие", "description": "Перед атакой получает +3 к атаке, но после атаки теряет 1 ед. здоровья"}])
 	get_tree().change_scene_to_file("res://scenes/map.tscn")
 	
 

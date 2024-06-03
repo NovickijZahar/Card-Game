@@ -163,8 +163,10 @@ func get_random_hero_in_current_room():
 	database.open_db()
 	var rows = database.select_rows("Heroes", "location="+str(room_id), ["*"])
 	var row = rows.pick_random()
-	return Hero.new(row["name"], row["image_name"],
-					JSON.parse_string(row["deck"]), row["hp"])
+	return [Hero.new(row["name"], row["image_name"],
+					JSON.parse_string(row["deck"]), row["hp"]),
+					get_enemy_deck(row["id"])]
+					
 
 func get_features(arr: Array, to_string=false):
 	var database = SQLite.new()

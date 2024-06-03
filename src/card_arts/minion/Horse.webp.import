@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqep43gxp2bpw"
-path="res://.godot/imported/SnowKnight.png-c7a01b595f0ea8005b5875782a9f5ff9.ctex"
+uid="uid://b3o8nf24bqqv7"
+path="res://.godot/imported/Horse.webp-54f242d7df980f94e2d0f5dee124fb42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/card_arts/minion/SnowKnight.png"
-dest_files=["res://.godot/imported/SnowKnight.png-c7a01b595f0ea8005b5875782a9f5ff9.ctex"]
+source_file="res://src/card_arts/minion/Horse.webp"
+dest_files=["res://.godot/imported/Horse.webp-54f242d7df980f94e2d0f5dee124fb42.ctex"]
 
 [params]
 

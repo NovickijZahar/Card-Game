@@ -8,6 +8,12 @@ extends Node2D
 									[$EnemySlot4.position - Vector2(60, 90),
 									$EnemySlot5.position - Vector2(60, 90),
 									$EnemySlot6.position - Vector2(60, 90)]]
+@onready var player_board_position = [[$PlayerSlot1.position - Vector2(60, 90),
+									$PlayerSlot2.position - Vector2(60, 90),
+									$PlayerSlot3.position - Vector2(60, 90)],
+									[$PlayerSlot4.position - Vector2(60, 90),
+									$PlayerSlot5.position - Vector2(60, 90),
+									$PlayerSlot6.position - Vector2(60, 90)]]
 var player_board = [[null, null, null], [null, null, null]] 
 var enemy_board = [[null, null, null], [null, null, null]]
 var hand_position = [Vector2(650, 800), Vector2(800, 800), 
@@ -36,8 +42,9 @@ func _ready():
 	
 	boss_id = DatabaseService.get_current_boss_id()
 	if boss_id == 0:
-		hero2.change_hero(DatabaseService.get_random_hero_in_current_room())
-		enemy_deck = DatabaseService.get_enemy_deck(2)
+		var temp = DatabaseService.get_random_hero_in_current_room()
+		hero2.change_hero(temp[0])
+		enemy_deck = temp[1]
 	else:
 		hero2.change_hero(DatabaseService.get_boss(boss_id))
 		enemy_deck = DatabaseService.get_boss_deck(boss_id)
@@ -114,10 +121,12 @@ func player_turn():
 	for i in range(player_board.size()):
 		for j in range(player_board[0].size()):
 			if player_board[i][j] != null:
+				var features = DatabaseService.get_features(JSON.parse_string(player_board[i][j].card.description))
+				if 'Безумие' in features:
+					player_board[i][j].change_stats(3, 0)
 				player_board[i][j].position.x += 20
 				await get_tree().create_timer(0.5).timeout
 				player_board[i][j].position.x -= 20
-				var features = DatabaseService.get_features(JSON.parse_string(player_board[i][j].card.description))
 				if enemy_board[0][j] != null:
 					if await enemy_board[0][j].get_damage(player_board[i][j].deal_damage()):
 						await get_tree().create_timer(0.5).timeout
@@ -145,11 +154,35 @@ func player_turn():
 						hero2.change_hp(-player_board[i][j].deal_damage())
 				if "Разогрев" in features:
 					player_board[i][j].change_stats(1, 1)
+				if "Ближний шквал" in features:
+					for tj in range(enemy_board[0].size()):
+						if enemy_board[0][tj] != null:
+							if await enemy_board[0][tj].get_damage(1):
+								await get_tree().create_timer(0.5).timeout
+								remove_child(enemy_board[0][tj])
+								enemy_board[0][tj] = null
+				if "Дальний шквал" in features:
+					for tj in range(enemy_board[0].size()):
+						if enemy_board[1][tj] != null:
+							if await enemy_board[1][tj].get_damage(1):
+								await get_tree().create_timer(0.5).timeout
+								remove_child(enemy_board[1][tj])
+								enemy_board[1][tj] = null
+				if 'Безумие' in features:
+					if await player_board[i][j].get_damage(1):
+						await get_tree().create_timer(0.5).timeout
+						remove_child(player_board[i][j])
+						slots[i][j].occupied = false
+						player_board[i][j] = null
+
 
 func enemy_turn():
 	for i in range(enemy_board.size()):
 		for j in range(enemy_board[0].size()):
 			if enemy_board[i][j] != null:
+				var features = DatabaseService.get_features(JSON.parse_string(enemy_board[i][j].card.description))
+				if 'Безумие' in features:
+					enemy_board[i][j].change_stats(3, 0)
 				enemy_board[i][j].position.x -= 20
 				await get_tree().create_timer(0.5).timeout
 				enemy_board[i][j].position.x += 20
@@ -159,6 +192,12 @@ func enemy_turn():
 						remove_child(player_board[0][j])
 						slots[0][j].occupied = false
 						player_board[0][j] = null
+					if "Цепная атака" in features:
+						if player_board[1][j] != null:
+							if await player_board[1][j].get_damage(enemy_board[i][j].deal_damage()):
+								await get_tree().create_timer(0.5).timeout
+								remove_child(enemy_board[1][j])
+								player_board[1][j] = null
 				elif player_board[1][j] != null:
 					if await player_board[1][j].get_damage(enemy_board[i][j].deal_damage()):
 						await get_tree().create_timer(0.5).timeout
@@ -167,6 +206,27 @@ func enemy_turn():
 						player_board[1][j] = null
 				else:
 					hero1.change_hp(-enemy_board[i][j].deal_damage())
+				if "Разогрев" in features:
+					enemy_board[i][j].change_stats(1, 1)
+				if "Ближний шквал" in features:
+					for tj in range(player_board[0].size()):
+						if player_board[0][tj] != null:
+							if await player_board[0][tj].get_damage(1):
+								await get_tree().create_timer(0.5).timeout
+								remove_child(player_board[0][tj])
+								player_board[0][tj] = null
+				if "Дальний шквал" in features:
+					for tj in range(player_board[0].size()):
+						if player_board[1][tj] != null:
+							if await player_board[1][tj].get_damage(1):
+								await get_tree().create_timer(0.5).timeout
+								remove_child(player_board[1][tj])
+								player_board[1][tj] = null
+				if 'Безумие' in features:
+					if await enemy_board[i][j].get_damage(1):
+						await get_tree().create_timer(0.5).timeout
+						remove_child(enemy_board[i][j])
+						enemy_board[i][j] = null
 
 func enemy_play():
 	if enemy_index != enemy_deck.size():
