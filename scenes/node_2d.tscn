@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfi6ild6gmsu8"]
+[gd_scene load_steps=5 format=3 uid="uid://bfi6ild6gmsu8"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_b7oni"]
+[ext_resource type="Texture2D" uid="uid://n48omn63lsxn" path="res://src/meny_background.jpg" id="2_hcswv"]
+[ext_resource type="FontFile" uid="uid://wv157uq44feq" path="res://SunnySpellsBasicRegular-Yz1Wv.ttf" id="3_1da75"]
+[ext_resource type="FontFile" uid="uid://bovmk8o04qerb" path="res://DarlingtonDemo-z8xjG.ttf" id="4_v1af7"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_b7oni")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(959.5, 540)
+scale = Vector2(3.13562, 2.49423)
+texture = ExtResource("2_hcswv")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(500, 1080)
@@ -19,6 +27,7 @@ alignment = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 focus_mode = 0
+theme_override_fonts/font = ExtResource("3_1da75")
 theme_override_font_sizes/font_size = 40
 text = "Новая игра"
 
@@ -29,6 +38,7 @@ layout_mode = 2
 [node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1da75")
 theme_override_font_sizes/font_size = 40
 text = "Продолжить"
 
@@ -40,8 +50,22 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 focus_mode = 0
+theme_override_fonts/font = ExtResource("3_1da75")
 theme_override_font_sizes/font_size = 40
 text = "Выход"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 599.0
+offset_top = 85.0
+offset_right = 1294.0
+offset_bottom = 356.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_v1af7")
+theme_override_font_sizes/font_size = 200
+text = "Shadows of chaos"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

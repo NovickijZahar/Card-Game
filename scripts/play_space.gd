@@ -197,6 +197,7 @@ func enemy_turn():
 							if await player_board[1][j].get_damage(enemy_board[i][j].deal_damage()):
 								await get_tree().create_timer(0.5).timeout
 								remove_child(enemy_board[1][j])
+								slots[1][j].occupied = false
 								player_board[1][j] = null
 				elif player_board[1][j] != null:
 					if await player_board[1][j].get_damage(enemy_board[i][j].deal_damage()):
@@ -215,6 +216,7 @@ func enemy_turn():
 								await get_tree().create_timer(0.5).timeout
 								remove_child(player_board[0][tj])
 								player_board[0][tj] = null
+								slots[0][tj].occupied = false
 				if "Дальний шквал" in features:
 					for tj in range(player_board[0].size()):
 						if player_board[1][tj] != null:
@@ -222,6 +224,7 @@ func enemy_turn():
 								await get_tree().create_timer(0.5).timeout
 								remove_child(player_board[1][tj])
 								player_board[1][tj] = null
+								slots[1][tj].occupied = false
 				if 'Безумие' in features:
 					if await enemy_board[i][j].get_damage(1):
 						await get_tree().create_timer(0.5).timeout
@@ -319,9 +322,16 @@ func boss_feature():
 
 
 func _on_button_pressed():
-	var earned_money = randi_range(10, 50)
+	var earned_money = 0
+	if boss_id == 4:
+		$Popup/CenterContainer/Label.text = 'Вы прошли игру.'
+	elif boss_id in range(1, 4):
+		earned_money = randi_range(100, 150)
+		$Popup/CenterContainer/Label.text = 'Вы победили.' + str(hero2.hero.name) + '\nВы заработали ' + str(earned_money) + '$'
+	else:
+		earned_money = randi_range(25, 75)
+		$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
 	DatabaseService.add_money(earned_money)
-	$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
 	$Popup.popup(Rect2i(450, 250, 1020, 560))
 
 

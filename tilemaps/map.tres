@@ -78,6 +78,10 @@ texture_region_size = Vector2i(128, 128)
 3:5/0 = 0
 3:5/0/custom_data_0 = true
 3:5/0/custom_data_3 = 1
+4:5/0 = 0
+4:5/0/custom_data_0 = true
+4:5/0/custom_data_1 = 4
+5:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h35ct"]
 texture = ExtResource("1_dwcvb")

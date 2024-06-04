@@ -20,7 +20,7 @@ func get_enemy_deck(id):
 	var row = database.select_rows("Heroes", "id=="+str(id), ["deck"])[0]["deck"]
 	var res = []
 	for c in JSON.parse_string(row):
-		res.append(get_card(c))
+		res.append(get_card(c, true))
 	return res
 	
 func get_boss_deck(id):
@@ -30,7 +30,7 @@ func get_boss_deck(id):
 	var row = database.select_rows("Bosses", "id=="+str(id), ["deck"])[0]["deck"]
 	var res = []
 	for c in JSON.parse_string(row):
-		res.append(get_card(c))
+		res.append(get_card(c, true))
 	return res
 	
 func get_deck():
@@ -80,11 +80,13 @@ func get_all_cards(without_collection):
 		res.append(card)
 	return res
 	
-func get_card(id):
+func get_card(id, enemy=false):
 	var database = SQLite.new()
 	database.path = 'res://data.db'
 	database.open_db()
 	var row = database.select_rows("CardDataBase", "id="+str(id), ["*"])[0]
+	if enemy:
+		row = database.select_rows("EnemyCardDataBase", "id="+str(id), ["*"])[0]
 	return MinionCard.new(row["name"], row["description"], 
 						row["image_name"], row["rarity"], 
 						row["manacost"], row["attack"], row["hp"])
@@ -195,6 +197,16 @@ func get_features_tooltip(arr: Array):
 		res += row["name"] + ": " + row["description"] + '\n'
 	return res
 
+func add_feature_to_card(card_name, feature_name):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	var feature_id = database.select_rows("Features", "name==\'"+feature_name+"\'", ["id"])[0]["id"]
+	var features = JSON.parse_string(database.select_rows("CardDataBase", "name==\'"+card_name+"\'", ["description"])[0]["description"])
+	features.append(int(feature_id))
+	database.update_rows("CardDataBase", "name==\'"+card_name+"\'", {"description": str(features)})
+	
+	
 func change_room(new_room: int):
 	var database = SQLite.new()
 	database.path = 'res://data.db'

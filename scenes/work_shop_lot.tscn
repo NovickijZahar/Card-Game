@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8alnm28fn3eh"]
+
+[ext_resource type="PackedScene" uid="uid://dhad7p1r76p6d" path="res://scenes/card_lot.tscn" id="1_t41i8"]
+
+[node name="WorkShopLot" instance=ExtResource("1_t41i8")]
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="Bars" index="4"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Bars/HBoxContainer2" index="0"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Новое свойство:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Bars/HBoxContainer2" index="1"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

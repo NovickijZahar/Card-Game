@@ -1,12 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2035ff1rr6a8"]
+[gd_scene load_steps=3 format=3 uid="uid://c2035ff1rr6a8"]
 
 [ext_resource type="Script" path="res://scripts/deck_edit.gd" id="1_wu1pw"]
+[ext_resource type="FontFile" uid="uid://wv157uq44feq" path="res://SunnySpellsBasicRegular-Yz1Wv.ttf" id="2_h70ij"]
 
 [node name="DeckEdit" type="Node2D"]
 script = ExtResource("1_wu1pw")
 
 [node name="Background" type="Sprite2D" parent="."]
 centered = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = 399.0
+offset_top = 100.0
+offset_right = 699.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_h70ij")
+theme_override_font_sizes/font_size = 40
+text = "Ваша колода"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 1287.0
+offset_top = 100.0
+offset_right = 1587.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_h70ij")
+theme_override_font_sizes/font_size = 40
+text = "Ваша коллекция"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="."]
 offset_left = 1287.0
@@ -37,19 +62,19 @@ theme_override_constants/v_separation = 20
 columns = 2
 
 [node name="ChangeButton" type="Button" parent="."]
-offset_left = 791.0
-offset_top = 766.0
-offset_right = 1147.0
-offset_bottom = 864.0
+offset_left = 399.0
+offset_top = 831.0
+offset_right = 699.0
+offset_bottom = 929.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
 text = "Поменять"
 
 [node name="ExitButton" type="Button" parent="."]
-offset_left = 791.0
-offset_top = 900.0
-offset_right = 1147.0
-offset_bottom = 998.0
+offset_left = 1287.0
+offset_top = 831.0
+offset_right = 1587.0
+offset_bottom = 929.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
 text = "Выйти"

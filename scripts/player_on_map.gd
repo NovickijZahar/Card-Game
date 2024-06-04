@@ -24,7 +24,8 @@ enum Locations
 	None,
 	Enemy,
 	Treasure,
-	Shop
+	Shop,
+	WorkShop
 }
 
 enum State
@@ -54,7 +55,7 @@ func _ready():
 	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
-	astar_grid.cell_size = Vector2(32, 32)
+	astar_grid.cell_size = Vector2(128, 128)
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
 	astar_grid.update()
 	for x in tile_map.get_used_rect().size.x:
@@ -142,6 +143,8 @@ func _on_enter_button_button_down():
 				DatabaseService.add_completed_event(current_pos)
 			Locations.Shop:
 				get_tree().change_scene_to_file("res://scenes/shop.tscn")
+			Locations.WorkShop:
+				get_tree().change_scene_to_file("res://scenes/workshop.tscn")
 	elif current_state == State.Room:
 		var res = get_all_battles()
 		if res == 0:
@@ -180,6 +183,7 @@ func get_all_battles():
 
 
 func _on_menu_button_button_down():
+	DatabaseService.set_map_position(global_position)
 	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
 
 
