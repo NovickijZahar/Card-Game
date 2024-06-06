@@ -80,6 +80,12 @@ func get_all_cards(without_collection):
 		res.append(card)
 	return res
 	
+func get_card_id(card_name):
+	var database = SQLite.new()
+	database.path = 'res://data.db'
+	database.open_db()
+	return database.select_rows("CardDataBase", "name==\'"+card_name+"\'", ["id"])[0]["id"]
+
 func get_card(id, enemy=false):
 	var database = SQLite.new()
 	database.path = 'res://data.db'

@@ -63,7 +63,7 @@ func _on_start_button_pressed():
 		"hp": {"data_type": "int"},
 	}
 	database.drop_table("EnemyCardDataBase")
-	database.create_table("EnemyCardDataBase", card_table)
+	database.create_table("EnemyCardDataBase", enemy_card_table)
 	database.insert_rows("EnemyCardDataBase", 
 		[arr_to_dict(['Убийца', 'Killer.png', AbstractCard.Rarity.Common, 2, 5, 1]),
 		arr_to_dict(['Воин', 'Warrior.png', AbstractCard.Rarity.Rare, 2, 3, 4]),
@@ -180,3 +180,7 @@ func _on_exit_button_pressed():
 
 func _on_continue_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/map.tscn")
+
+
+func _on_online_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/online_mod.tscn")

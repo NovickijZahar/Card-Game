@@ -41,12 +41,15 @@ func deal_damage() -> int:
 func get_manacost() -> int:
 	return int($Bars/TopBar/ManaBar/ManaLabel.text)
 
+func get_hp() -> int:
+	return int($Bars/BottomBar/HpBar/HpLabel.text)
 
 var dragable = false
 var is_inside_dropable = false
 var body_ref
 var offset: Vector2
 var initial_position: Vector2
+
 
 
 func _process(delta):
@@ -76,6 +79,7 @@ func _process(delta):
 var is_played: bool = false
 var enough_mana: bool = true
 var is_enable: bool = true
+var is_enable2: bool = true
 var is_chosen: bool = false
 
 func _on_area_2d_body_entered(body):

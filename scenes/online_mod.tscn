@@ -1,0 +1,230 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp02sp8j8obv8"]
+
+[ext_resource type="Script" path="res://scripts/online_mod.gd" id="1_wjc18"]
+[ext_resource type="PackedScene" uid="uid://b2ee2cxy7mpai" path="res://scenes/hero_base.tscn" id="2_nl8y8"]
+
+[node name="online_mod" type="Node2D"]
+script = ExtResource("1_wjc18")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1608.0
+offset_top = 727.0
+offset_right = 1839.0
+offset_bottom = 794.0
+theme_override_font_sizes/font_size = 30
+text = "Закончить ход"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="PlayerSlots" type="GridContainer" parent="."]
+offset_left = 599.0
+offset_top = 127.0
+offset_right = 889.0
+offset_bottom = 727.0
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="Slot1" type="ColorRect" parent="PlayerSlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.992651, 0.570202, 0.430196, 1)
+
+[node name="Slot2" type="ColorRect" parent="PlayerSlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.992651, 0.570202, 0.430196, 1)
+
+[node name="Slot3" type="ColorRect" parent="PlayerSlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.992651, 0.570202, 0.430196, 1)
+
+[node name="Slot4" type="ColorRect" parent="PlayerSlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.992651, 0.570202, 0.430196, 1)
+
+[node name="Slot5" type="ColorRect" parent="PlayerSlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.992651, 0.570202, 0.430196, 1)
+
+[node name="Slot6" type="ColorRect" parent="PlayerSlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.992651, 0.570202, 0.430196, 1)
+
+[node name="EnemySlots" type="GridContainer" parent="."]
+offset_left = 1018.0
+offset_top = 127.0
+offset_right = 1308.0
+offset_bottom = 727.0
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="Slot1" type="ColorRect" parent="EnemySlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.657965, 0.382713, 0.0154837, 1)
+
+[node name="Slot2" type="ColorRect" parent="EnemySlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.657965, 0.382713, 0.0154837, 1)
+
+[node name="Slot3" type="ColorRect" parent="EnemySlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.657965, 0.382713, 0.0154837, 1)
+
+[node name="Slot4" type="ColorRect" parent="EnemySlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.657965, 0.382713, 0.0154837, 1)
+
+[node name="Slot5" type="ColorRect" parent="EnemySlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.657965, 0.382713, 0.0154837, 1)
+
+[node name="Slot6" type="ColorRect" parent="EnemySlots"]
+custom_minimum_size = Vector2(130, 180)
+layout_mode = 2
+color = Color(0.657965, 0.382713, 0.0154837, 1)
+
+[node name="Hand" type="HBoxContainer" parent="."]
+offset_left = 599.0
+offset_top = 813.0
+offset_right = 1308.0
+offset_bottom = 1001.0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Host" type="Button" parent="."]
+offset_left = 7.0
+offset_top = 89.0
+offset_right = 58.0
+offset_bottom = 120.0
+text = "HOST"
+
+[node name="Join" type="Button" parent="."]
+offset_left = 58.0
+offset_top = 89.0
+offset_right = 101.0
+offset_bottom = 120.0
+text = "JOIN"
+
+[node name="Send" type="Button" parent="."]
+offset_left = 7.0
+offset_top = 223.0
+offset_right = 58.0
+offset_bottom = 254.0
+text = "SEND"
+
+[node name="Username" type="LineEdit" parent="."]
+offset_left = 7.0
+offset_top = 120.0
+offset_right = 157.0
+offset_bottom = 151.0
+placeholder_text = "Username"
+alignment = 1
+
+[node name="Message" type="LineEdit" parent="."]
+offset_left = 7.0
+offset_top = 192.0
+offset_right = 157.0
+offset_bottom = 223.0
+
+[node name="Messages" type="RichTextLabel" parent="."]
+offset_left = 7.0
+offset_top = 271.0
+offset_right = 240.0
+offset_bottom = 467.0
+
+[node name="ManaContainer" type="HBoxContainer" parent="."]
+offset_left = 1608.0
+offset_top = 917.0
+offset_right = 1812.0
+offset_bottom = 972.0
+
+[node name="Label" type="Label" parent="ManaContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Мана: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurManaLabel" type="Label" parent="ManaContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0649558, 0, 0.724248, 1)
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ManaContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxManaLabel" type="Label" parent="ManaContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0649558, 0, 0.724248, 1)
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeroBase" parent="." instance=ExtResource("2_nl8y8")]
+offset_left = 291.0
+offset_top = 254.0
+offset_right = 516.0
+offset_bottom = 579.0
+
+[node name="EnemyBase" parent="." instance=ExtResource("2_nl8y8")]
+offset_left = 1388.0
+offset_top = 254.0
+offset_right = 1613.0
+offset_bottom = 579.0
+
+[node name="Popup" type="Popup" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Popup/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="PlayerSlots/Slot1" to="." method="_on_color_rect_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerSlots/Slot1" to="." method="_on_slot_1_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerSlots/Slot2" to="." method="_on_color_rect_2_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerSlots/Slot2" to="." method="_on_slot_2_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerSlots/Slot3" to="." method="_on_color_rect_3_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerSlots/Slot3" to="." method="_on_slot_3_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerSlots/Slot4" to="." method="_on_color_rect_4_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerSlots/Slot4" to="." method="_on_slot_4_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerSlots/Slot5" to="." method="_on_color_rect_5_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerSlots/Slot5" to="." method="_on_slot_5_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerSlots/Slot6" to="." method="_on_color_rect_6_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerSlots/Slot6" to="." method="_on_slot_6_mouse_exited"]
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Send" to="." method="_on_send_pressed"]
+[connection signal="popup_hide" from="Popup" to="." method="_on_popup_popup_hide"]

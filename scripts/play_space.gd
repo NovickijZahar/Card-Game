@@ -88,14 +88,18 @@ func _process(delta):
 	$MarginContainer/ColorRect.tooltip_text = 'В вашей колоде ' + str(data.size() - card_index) + ' карт'
 	
 	if hero1.get_hp() <= 0:
-		DatabaseService.add_money(earned_money)
 		$Popup/CenterContainer/Label.text = 'Вы проиграли.\nИгра окончена.'
 		$Popup.popup(Rect2i(450, 250, 1020, 560))
 	if hero2.get_hp() <= 0:
-		DatabaseService.add_money(earned_money)
 		if boss_id == 4:
 			$Popup/CenterContainer/Label.text = 'Вы прошли игру.'
+		elif boss_id in range(1, 4):
+			if earned_money == 0:
+				earned_money = randi_range(100, 150)
+			$Popup/CenterContainer/Label.text = 'Вы победили ' + str(hero2.hero.name) + '\nВы заработали ' + str(earned_money) + '$'
 		else:
+			if earned_money == 0:
+				earned_money = randi_range(25, 75)
 			$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
 		$Popup.popup(Rect2i(450, 250, 1020, 560))
 	
@@ -322,7 +326,7 @@ func boss_feature():
 
 
 func _on_button_pressed():
-	var earned_money = 0
+	earned_money = 0
 	if boss_id == 4:
 		$Popup/CenterContainer/Label.text = 'Вы прошли игру.'
 	elif boss_id in range(1, 4):
@@ -331,13 +335,13 @@ func _on_button_pressed():
 	else:
 		earned_money = randi_range(25, 75)
 		$Popup/CenterContainer/Label.text = 'Вы победили.\nВы заработали ' + str(earned_money) + '$'
-	DatabaseService.add_money(earned_money)
 	$Popup.popup(Rect2i(450, 250, 1020, 560))
 
 
 
 func _on_popup_popup_hide():
 	DatabaseService.set_current_boss(0)
+	DatabaseService.add_money(earned_money)
 	if hero1.get_hp() <= 0:
 		get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
 	else:
