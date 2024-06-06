@@ -252,7 +252,7 @@ func joined():
 	max_mana_label.text = '3'
 
 func draw_card():
-	if deck_index != deck.size() - 1:
+	if deck_index != deck.size():
 		var card = cardbase.instantiate()
 		card.card = deck[deck_index]
 		card.is_enable = false
@@ -261,4 +261,5 @@ func draw_card():
 	
 
 func _on_popup_popup_hide():
+	multiplayer.multiplayer_peer.close()
 	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
